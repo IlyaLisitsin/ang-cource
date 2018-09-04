@@ -1,0 +1,15 @@
+<div>
+  <div class="user-panel">
+    <div class="search-box">
+      <input placeholder="Name fragment or data">
+      <button (click)="searchClick()">Search</button>
+    </div>
+    <button (click)="addCourceClick()">Add cource</button>
+  </div>
+  <div *ngFor="let cource of courceCollection">
+    <h1>{{cource.title}}</h1>
+    <span>{{cource.duration}}</span>
+    <span>{{cource.creation}}</span>
+    <div>{{cource.description}}</div>
+  </div>
+</div>

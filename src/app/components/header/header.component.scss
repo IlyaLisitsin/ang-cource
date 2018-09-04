@@ -1,0 +1,14 @@
+:host {
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: 100px;
+    height: 100px;
+    background-color: aliceblue;
+    background: url(http://www.gau.edu.tr/images/logo/logo_kartal.png);
+    background-size: cover;
+  }
+}
