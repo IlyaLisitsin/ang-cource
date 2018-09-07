@@ -6,6 +6,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { CourceBorderDirective } from './directives/cource-border.directive';
+import { TransformDurationPipe } from './pipes/transform-duration.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { MainContentComponent } from './components/main-content/main-content.com
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    MainContentComponent
+    MainContentComponent,
+    CourceBorderDirective,
+    TransformDurationPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule
