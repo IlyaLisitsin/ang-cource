@@ -1,22 +1,22 @@
 <div>
   <div class="user-panel">
     <div class="search-box">
-      <input placeholder="Name fragment or data">
-      <button (click)="searchClick()">Search</button>
+      <input #filterInput placeholder="Name fragment or data">
+      <button (click)="buttonClick(filterInput.value)">Search</button>
     </div>
     <button (click)="addCourceClick()">Add cource</button>
   </div>
   <div *ngIf="courceCollection.length">
     <div
       class="cource"
-      *ngFor="let cource of courceCollection"
+      *ngFor="let cource of courceCollection | orderBy: filterConditionFromInput || 'topRated'"
       appCourceBorder [creationDate]="cource.creation"
     >
-      <h2>{{cource.title}}</h2>
+      <h2>{{cource.title | uppercase}}</h2>
       <span *ngIf="cource.topRated">TOP RATED!</span>
       <div class="cource-info">
-        <span class="cource-duration">{{cource.duration}}</span>
-        <span class="cource-creation">{{dateString(cource.creation)}}</span>
+        <span class="cource-duration">{{cource.duration | transformDuration}}</span>
+        <span class="cource-creation">{{cource.creation | date: 'mediumDate'}}</span>
       </div>
       <div>{{cource.description}}</div>
     </div>

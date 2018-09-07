@@ -4,21 +4,21 @@ interface Cource {
   id: number
   title: string
   creation: any
-  duration: string
+  duration: number
   description: string
   topRated?: boolean
 }
 
 const courceCollection = [
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: '1h 28min', description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: '1h 28min', description: 'Description 3' },
-  { id: 23, title: 'Title 2', creation: new Date(2018, 9,7), duration: '1h 28min', description: 'Description 2' },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 8,6), duration: '1h 28min', description: 'Description 3' },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: '1h 28min', description: 'Description 3' },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,24), duration: '1h 28min', description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,25), duration: '1h 28min', description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 4', creation: new Date(2011, 1,20), duration: '1h 28min', description: 'Description 4' },
-  { id: 23, title: 'Title 1', creation: new Date(2018, 8,15), duration: '1h 28min', description: 'Description 1' },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 95, description: 'Description 3', topRated: true },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 35, description: 'Description 3', topRated: false },
+  { id: 23, title: 'Title 2', creation: new Date(2018, 9,7), duration: 55, description: 'Description 2', topRated: false },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 8,6), duration: 135, description: 'Description 3', topRated: false },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 235, description: 'Description 3', topRated: false },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 7,24), duration: 45, description: 'Description 3', topRated: true },
+  { id: 23, title: 'Title 3', creation: new Date(2018, 7,25), duration: 65, description: 'Description 3', topRated: true },
+  { id: 23, title: 'Title 4', creation: new Date(2011, 1,20), duration: 125, description: 'Description 4', topRated: false },
+  { id: 23, title: 'Title 1', creation: new Date(2018, 8,15), duration: 432, description: 'Description 1', topRated: false },
 ]
 
 @Component({
@@ -28,18 +28,16 @@ const courceCollection = [
 })
 
 export class MainContentComponent implements OnInit {
-  courceCollection: Array<Cource>;
+  courceCollection: Array<Cource>
+  filterConditionFromInput: string
 
   constructor() {
     this.courceCollection = courceCollection
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  dateString = date => `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
-
-  searchClick = () => console.log('Search clicked')
+  buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
 
   addCourceClick = () => console.log('Add cource clicked')
 
