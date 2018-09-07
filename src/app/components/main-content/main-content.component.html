@@ -6,10 +6,23 @@
     </div>
     <button (click)="addCourceClick()">Add cource</button>
   </div>
-  <div *ngFor="let cource of courceCollection">
-    <h1>{{cource.title}}</h1>
-    <span>{{cource.duration}}</span>
-    <span>{{cource.creation}}</span>
-    <div>{{cource.description}}</div>
+  <div *ngIf="courceCollection.length">
+    <div
+      class="cource"
+      *ngFor="let cource of courceCollection"
+      appCourceBorder [creationDate]="cource.creation"
+    >
+      <h2>{{cource.title}}</h2>
+      <span *ngIf="cource.topRated">TOP RATED!</span>
+      <div class="cource-info">
+        <span class="cource-duration">{{cource.duration}}</span>
+        <span class="cource-creation">{{dateString(cource.creation)}}</span>
+      </div>
+      <div>{{cource.description}}</div>
+    </div>
   </div>
-</div>
+  <div *ngIf="!courceCollection.length">
+    <h2>No data. Feel free to add new cource</h2>
+  </div>
+
+  </div>
