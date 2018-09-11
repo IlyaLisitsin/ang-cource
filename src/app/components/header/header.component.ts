@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-
-interface User {
-  id: string
-  firstName: string
-  lastName: string
-}
+import { User } from '../../models/user.model'
+import { AuthorizationService } from "../../services";
+import {a} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-header',
@@ -13,13 +10,28 @@ interface User {
 })
 
 export class HeaderComponent implements OnInit {
-  userLogin: any = <User>{ id: '123213', firstName: 'Niko', lastName: 'Bobokin' }
+  userLogin: User
+  isAuth: boolean
+  logout: any
+  getConsumerInfo: any
 
-  constructor() { }
+  constructor(private authService: AuthorizationService) {
+    this.isAuth = authService.isAuthenticated()
+    this.logout = authService.logout
+    this.getConsumerInfo = authService.getConsumerInfo
+
+    this.userLogin = this.getConsumerInfo()
+  }
 
   ngOnInit() {
   }
 
-  logoutClick = () => console.log('logout button clicked')
+  logoutClick() {
+    this.logout()
+  }
+
+  login() {
+    console.log(3324324)
+  }
 
 }

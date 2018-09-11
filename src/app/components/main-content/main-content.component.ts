@@ -1,25 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Cource {
-  id: number
-  title: string
-  creation: any
-  duration: number
-  description: string
-  topRated?: boolean
-}
-
-const courceCollection = [
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 95, description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 35, description: 'Description 3', topRated: false },
-  { id: 23, title: 'Title 2', creation: new Date(2018, 9,7), duration: 55, description: 'Description 2', topRated: false },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 8,6), duration: 135, description: 'Description 3', topRated: false },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,20), duration: 235, description: 'Description 3', topRated: false },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,24), duration: 45, description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 3', creation: new Date(2018, 7,25), duration: 65, description: 'Description 3', topRated: true },
-  { id: 23, title: 'Title 4', creation: new Date(2011, 1,20), duration: 125, description: 'Description 4', topRated: false },
-  { id: 23, title: 'Title 1', creation: new Date(2018, 8,15), duration: 432, description: 'Description 1', topRated: false },
-]
+import { Cource } from "../../models";
+import { CourceService, AuthorizationService } from "../../services";
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import {a} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-main-content',
@@ -28,11 +11,21 @@ const courceCollection = [
 })
 
 export class MainContentComponent implements OnInit {
-  courceCollection: Array<Cource>
+  courcesCollection: Array<Cource>
   filterConditionFromInput: string
+  activeModalCourceId: number
+  courceRemove: any
+  isAuth: boolean
 
-  constructor() {
-    this.courceCollection = courceCollection
+  constructor(
+    private courceService: CourceService,
+    private authService: AuthorizationService,
+    public ngxSmartModalService: NgxSmartModalService
+  ) {
+    this.courcesCollection = courceService.getCources()
+    this.courceRemove = courceService.removeItem
+
+    this.isAuth = authService.isAuthenticated()
   }
 
   ngOnInit() {}
@@ -40,5 +33,14 @@ export class MainContentComponent implements OnInit {
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
 
   addCourceClick = () => console.log('Add cource clicked')
+
+  removeCurrentCource() {
+    return () => this.courceRemove(this.activeModalCourceId)
+  }
+
+  openModal(index) {
+    this.activeModalCourceId = this.courcesCollection[index].id
+    this.ngxSmartModalService.getModal('deleteCourceModal').open()
+  }
 
 }

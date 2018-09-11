@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -9,6 +10,8 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { CourceBorderDirective } from './directives/cource-border.directive';
 import { TransformDurationPipe } from './pipes/transform-duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { DeleteCourceModalComponent } from './components/modals/delete-cource-modal/delete-cource-modal.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,13 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     MainContentComponent,
     CourceBorderDirective,
     TransformDurationPipe,
-    OrderByPipe
+    OrderByPipe,
+    DeleteCourceModalComponent,
+    LoginPageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgxSmartModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
