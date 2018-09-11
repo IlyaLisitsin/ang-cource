@@ -11,9 +11,11 @@ import { CourceService } from "../../services/cource.service";
 export class MainContentComponent implements OnInit {
   courcesCollection: Array<Cource>
   filterConditionFromInput: string
+  courceRemove: any
 
   constructor(private courceService: CourceService) {
     this.courcesCollection = courceService.getCources()
+    this.courceRemove = courceService.removeItem
   }
 
   ngOnInit() {}
@@ -23,7 +25,7 @@ export class MainContentComponent implements OnInit {
   addCourceClick = () => console.log('Add cource clicked')
 
   removeCourceClick(index) {
-    this.courceService.removeItem(this.courcesCollection[index].id)
+    this.courceRemove(this.courcesCollection[index].id)
   }
 
 }
