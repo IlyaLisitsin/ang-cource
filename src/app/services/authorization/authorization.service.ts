@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthorizationService {
-  a: any
+  test: any
 
-  constructor() { }
+  constructor() {
+    this.test = 12
+  }
 
   login(firstName) {
     localStorage.setItem('angCourseUser', firstName)
