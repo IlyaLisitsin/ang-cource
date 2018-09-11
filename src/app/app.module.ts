@@ -10,6 +10,7 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { CourceBorderDirective } from './directives/cource-border.directive';
 import { TransformDurationPipe } from './pipes/transform-duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { DeleteCourceModalComponent } from './components/modals/delete-cource-modal/delete-cource-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     MainContentComponent,
     CourceBorderDirective,
     TransformDurationPipe,
-    OrderByPipe
+    OrderByPipe,
+    DeleteCourceModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,17 +19,13 @@
         <span class="cource-creation">{{cource.creation | date: 'mediumDate'}}</span>
       </div>
       <div>{{cource.description}}</div>
-      <button (click)="removeCourceClick(i)">remove</button>
-      <button (click)="openModal()">sdf</button>
+      <button (click)="openModal(i)">remove</button>
     </div>
   </div>
   <div *ngIf="!courcesCollection.length">
     <h2>No data. Feel free to add new cource</h2>
   </div>
-  <ngx-smart-modal #myModal identifier="myModal">
-    <h1>Title</h1>
-    <p>Some stuff...</p>
-
-    <button (click)="myModal.close()">Close</button>
-  </ngx-smart-modal>
-  </div>
+  <app-delete-cource-modal
+    [removeCurrentCource]="removeCurrentCource()"
+  ></app-delete-cource-modal>
+</div>

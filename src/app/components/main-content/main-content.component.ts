@@ -12,6 +12,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 export class MainContentComponent implements OnInit {
   courcesCollection: Array<Cource>
   filterConditionFromInput: string
+  activeModalCourceId: number
   courceRemove: any
 
   constructor(
@@ -28,13 +29,13 @@ export class MainContentComponent implements OnInit {
 
   addCourceClick = () => console.log('Add cource clicked')
 
-  removeCourceClick(index) {
-    this.courceRemove(this.courcesCollection[index].id)
+  removeCurrentCource() {
+    return () => this.courceRemove(this.activeModalCourceId)
   }
 
-  openModal() {
-    console.log(this.ngxSmartModalService.getModal('myModal'))
-    this.ngxSmartModalService.getModal('myModal').open()
+  openModal(index) {
+    this.activeModalCourceId = this.courcesCollection[index].id
+    this.ngxSmartModalService.getModal('deleteCourceModal').open()
   }
 
 }
