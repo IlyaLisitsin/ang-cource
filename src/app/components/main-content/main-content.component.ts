@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cource } from "../../models";
 import { CourceService } from "../../services/cource.service";
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-main-content',
@@ -13,7 +14,10 @@ export class MainContentComponent implements OnInit {
   filterConditionFromInput: string
   courceRemove: any
 
-  constructor(private courceService: CourceService) {
+  constructor(
+    private courceService: CourceService,
+    public ngxSmartModalService: NgxSmartModalService
+  ) {
     this.courcesCollection = courceService.getCources()
     this.courceRemove = courceService.removeItem
   }
@@ -26,6 +30,11 @@ export class MainContentComponent implements OnInit {
 
   removeCourceClick(index) {
     this.courceRemove(this.courcesCollection[index].id)
+  }
+
+  openModal() {
+    console.log(this.ngxSmartModalService.getModal('myModal'))
+    this.ngxSmartModalService.getModal('myModal').open()
   }
 
 }

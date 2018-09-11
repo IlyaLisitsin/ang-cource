@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -22,7 +23,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     OrderByPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgxSmartModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
