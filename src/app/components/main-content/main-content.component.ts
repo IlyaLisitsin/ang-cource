@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Cource } from "../../models";
-import { CourceService } from "../../services";
+import { CourceService, AuthorizationService } from "../../services";
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import {a} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-main-content',
@@ -14,13 +15,17 @@ export class MainContentComponent implements OnInit {
   filterConditionFromInput: string
   activeModalCourceId: number
   courceRemove: any
+  isAuth: boolean
 
   constructor(
     private courceService: CourceService,
+    private authService: AuthorizationService,
     public ngxSmartModalService: NgxSmartModalService
   ) {
     this.courcesCollection = courceService.getCources()
     this.courceRemove = courceService.removeItem
+
+    this.isAuth = authService.isAuthenticated()
   }
 
   ngOnInit() {}

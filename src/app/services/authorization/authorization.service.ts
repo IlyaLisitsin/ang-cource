@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from "../../models";
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,14 @@ export class AuthorizationService {
     this.test = 12
   }
 
-  login(firstName) {
-    localStorage.setItem('angCourseUser', firstName)
+  login(user: User) {
+    localStorage.setItem('angCourseUser', JSON.stringify(user))
+    location.reload()
   }
 
   logout() {
     localStorage.removeItem('angCourseUser')
+    location.reload()
   }
 
   isAuthenticated() {
@@ -26,6 +29,7 @@ export class AuthorizationService {
   }
 
   getConsumerInfo() {
-    return localStorage.getItem('angCourseUser')
+    console.log(localStorage.getItem('angCourseUser'))
+    return JSON.parse(localStorage.getItem('angCourseUser'))
   }
 }

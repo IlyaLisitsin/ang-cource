@@ -1,31 +1,34 @@
 <div>
-  <div class="user-panel">
-    <div class="search-box">
-      <input #filterInput placeholder="Name fragment or data">
-      <button (click)="buttonClick(filterInput.value)">Search</button>
-    </div>
-    <button (click)="addCourceClick()">Add cource</button>
-  </div>
-  <div *ngIf="courcesCollection.length">
-    <div
-      class="cource"
-      *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'topRated'; index as i"
-      appCourceBorder [creationDate]="cource.creation"
-    >
-      <h2>{{cource.title | uppercase}}</h2>
-      <span *ngIf="cource.topRated">TOP RATED!</span>
-      <div class="cource-info">
-        <span class="cource-duration">{{cource.duration | transformDuration}}</span>
-        <span class="cource-creation">{{cource.creation | date: 'mediumDate'}}</span>
+  <div *ngIf="isAuth">
+    <div class="user-panel">
+      <div class="search-box">
+        <input #filterInput placeholder="Name fragment or data">
+        <button (click)="buttonClick(filterInput.value)">Search</button>
       </div>
-      <div>{{cource.description}}</div>
-      <button (click)="openModal(i)">remove</button>
+      <button (click)="addCourceClick()">Add cource</button>
     </div>
+    <div *ngIf="courcesCollection.length">
+      <div
+        class="cource"
+        *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'topRated'; index as i"
+        appCourceBorder [creationDate]="cource.creation"
+      >
+        <h2>{{cource.title | uppercase}}</h2>
+        <span *ngIf="cource.topRated">TOP RATED!</span>
+        <div class="cource-info">
+          <span class="cource-duration">{{cource.duration | transformDuration}}</span>
+          <span class="cource-creation">{{cource.creation | date: 'mediumDate'}}</span>
+        </div>
+        <div>{{cource.description}}</div>
+        <button (click)="openModal(i)">remove</button>
+      </div>
+    </div>
+    <div *ngIf="!courcesCollection.length">
+      <h2>No data. Feel free to add new cource</h2>
+    </div>
+    <app-delete-cource-modal
+      [removeCurrentCource]="removeCurrentCource()"
+    ></app-delete-cource-modal>
   </div>
-  <div *ngIf="!courcesCollection.length">
-    <h2>No data. Feel free to add new cource</h2>
-  </div>
-  <app-delete-cource-modal
-    [removeCurrentCource]="removeCurrentCource()"
-  ></app-delete-cource-modal>
+  <app-login-page *ngIf="!isAuth"></app-login-page>
 </div>

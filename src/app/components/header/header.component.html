@@ -5,9 +5,6 @@
       <div>{{userLogin.firstName}} {{userLogin.lastName}}</div>
       <button (click)="logoutClick()">Log out</button>
     </div>
-    <div *ngIf="!isAuth">
-      <button (click)="login()">Login</button>
-    </div>
   </div>
-  <app-breadcrumbs></app-breadcrumbs>
+  <app-breadcrumbs *ngIf="isAuth"></app-breadcrumbs>
 </header>

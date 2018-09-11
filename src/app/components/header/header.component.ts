@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from '../../models/user.model'
 import { AuthorizationService } from "../../services";
+import {a} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,17 @@ import { AuthorizationService } from "../../services";
 })
 
 export class HeaderComponent implements OnInit {
-  userLogin: any = <User>{ id: '123213', firstName: 'Niko', lastName: 'Bobokin' }
+  userLogin: User
   isAuth: boolean
   logout: any
+  getConsumerInfo: any
 
   constructor(private authService: AuthorizationService) {
     this.isAuth = authService.isAuthenticated()
     this.logout = authService.logout
-    console.log(authService)
+    this.getConsumerInfo = authService.getConsumerInfo
+
+    this.userLogin = this.getConsumerInfo()
   }
 
   ngOnInit() {

@@ -11,6 +11,7 @@ import { CourceBorderDirective } from './directives/cource-border.directive';
 import { TransformDurationPipe } from './pipes/transform-duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { DeleteCourceModalComponent } from './components/modals/delete-cource-modal/delete-cource-modal.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DeleteCourceModalComponent } from './components/modals/delete-cource-mo
     TransformDurationPipe,
     OrderByPipe,
     DeleteCourceModalComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
