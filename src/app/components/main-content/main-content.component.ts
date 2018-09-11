@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cource } from "../../models";
-import { CourceService } from "../../services/cource.service";
+import { CourceService } from "../../services";
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({

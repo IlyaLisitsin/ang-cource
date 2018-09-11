@@ -1,9 +1,12 @@
 <header>
   <div class="header-top">
     <div class="logo"></div>
-    <div class="login-panel">
+    <div *ngIf="isAuth" class="login-panel">
       <div>{{userLogin.firstName}} {{userLogin.lastName}}</div>
       <button (click)="logoutClick()">Log out</button>
+    </div>
+    <div *ngIf="!isAuth">
+      <button (click)="login()">Login</button>
     </div>
   </div>
   <app-breadcrumbs></app-breadcrumbs>

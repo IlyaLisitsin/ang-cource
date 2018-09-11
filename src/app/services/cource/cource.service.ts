@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cource } from '../models/cource.model'
+import { Cource } from '../../models/cource.model'
 
 const courcesCollection = [
   { id: 1, title: 'Title 3', creation: new Date(2018, 7,20), duration: 95, description: 'Description 3', topRated: true },
@@ -22,7 +22,6 @@ export class CourceService {
 
   constructor() {
     this.courcesCollection = courcesCollection
-    console.log(this.courcesCollection)
   }
 
   getCources(): Array<Cource> {
@@ -38,8 +37,6 @@ export class CourceService {
   }
 
   removeItem(id: number): void {
-    console.log(this.courcesCollection, id)
     this.courcesCollection = this.courcesCollection.filter(cource => cource.id !== id)
-    console.log(this.courcesCollection)
   }
 }
