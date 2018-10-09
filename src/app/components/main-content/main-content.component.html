@@ -8,27 +8,13 @@
       <button (click)="addCourceClick()">Add cource</button>
     </div>
     <div *ngIf="courcesCollection.length">
-      <div
-        class="cource"
-        *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'topRated'; index as i"
-        appCourceBorder [creationDate]="cource.creation"
-      >
-        <h2>{{cource.title | uppercase}}</h2>
-        <span *ngIf="cource.topRated">TOP RATED!</span>
-        <div class="cource-info">
-          <span class="cource-duration">{{cource.duration | transformDuration}}</span>
-          <span class="cource-creation">{{cource.creation | date: 'mediumDate'}}</span>
-        </div>
-        <div>{{cource.description}}</div>
-        <button (click)="openModal(i)">remove</button>
-      </div>
+      <app-cource-collection
+        [courcesCollection]="courcesCollection"
+      ></app-cource-collection>
     </div>
     <div *ngIf="!courcesCollection.length">
       <h2>No data. Feel free to add new cource</h2>
     </div>
-    <app-delete-cource-modal
-      [removeCurrentCource]="removeCurrentCource()"
-    ></app-delete-cource-modal>
   </div>
   <app-login-page *ngIf="!isAuth"></app-login-page>
 </div>
