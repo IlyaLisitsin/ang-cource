@@ -13,12 +13,10 @@ export class AuthorizationService {
 
   login(user: User) {
     localStorage.setItem('angCourseUser', JSON.stringify(user))
-    location.reload()
   }
 
   logout() {
     localStorage.removeItem('angCourseUser')
-    location.reload()
   }
 
   isAuthenticated() {

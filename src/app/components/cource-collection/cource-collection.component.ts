@@ -9,6 +9,7 @@ import {CourceService} from "../../services";
 })
 export class CourceCollectionComponent implements OnInit {
   @Input() courcesCollection: any;
+  @Input() filterConditionFromInput: string;
   activeModalCourceId: number;
   courceRemove: any
 
