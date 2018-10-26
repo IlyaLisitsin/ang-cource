@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "server": "node server",
+    "kek": "concurrently \"npm run server\" \"ng serve\""
   },
   "private": true,
   "dependencies": {
@@ -20,7 +22,9 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "concurrently": "^4.0.1",
     "core-js": "^2.5.4",
+    "express": "^4.16.4",
     "ngx-smart-modal": "^7.0.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

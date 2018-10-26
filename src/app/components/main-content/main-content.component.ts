@@ -22,6 +22,8 @@ export class MainContentComponent implements OnInit {
 
   ngOnInit() {
     this.courcesCollection = this.courceService.getCources()
+
+    console.log(123, this.courceService.test())
   }
 
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue

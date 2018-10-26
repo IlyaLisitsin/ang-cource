@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cource } from '../../models/cource.model'
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 const courcesCollection = [
   { id: 1, title: 'Title 3', creation: new Date(2018, 7,20), duration: 95, description: 'Description 3', topRated: true },
@@ -19,9 +20,20 @@ const courcesCollection = [
 
 export class CourceService {
   courcesCollection: Array<Cource>
+  testList: Cource[]
 
-  constructor() {
+  constructor(
+    private httpClient: HttpClient
+  ) {
     this.courcesCollection = courcesCollection
+  }
+
+  test() {
+    this.httpClient.get('http://localhost:8080/api/getUsername', {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }).subscribe(cources => cources)
   }
 
   getCources(): Array<Cource> {
