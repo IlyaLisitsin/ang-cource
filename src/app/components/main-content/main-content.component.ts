@@ -12,7 +12,7 @@ export class MainContentComponent implements OnInit {
   @Input() isAuth: boolean;
   @Output() loginFromLoginPage = new EventEmitter()
 
-  courcesCollection: Array<Cource>
+  courcesCollection: Array<Cource> = []
   filterConditionFromInput: string
 
   constructor(
@@ -21,9 +21,9 @@ export class MainContentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.courcesCollection = this.courceService.getCources()
-
-    console.log(123, this.courceService.test())
+    this.courceService.fetchCources().subscribe(data => {
+      this.courcesCollection = data.courcesCollection
+    })
   }
 
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
