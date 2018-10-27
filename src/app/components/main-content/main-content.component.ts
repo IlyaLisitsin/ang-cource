@@ -21,8 +21,8 @@ export class MainContentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.courceService.fetchCources().subscribe(data => {
-      this.courcesCollection = data.courcesCollection
+    this.courceService.getCourcesList.forEach(value => {
+      this.courcesCollection = value
     })
   }
 

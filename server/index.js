@@ -1,7 +1,6 @@
 const express = require('express')
-const os = require('os')
 
-const courcesCollection = [
+const courcesList = [
   { id: 1, title: 'Title 3', creation: new Date(2018, 7,20), duration: 95, description: 'Description 3', topRated: true },
   { id: 2, title: 'Title 3', creation: new Date(2018, 7,20), duration: 35, description: 'Description 3', topRated: false },
   { id: 3, title: 'Title 2', creation: new Date(2018, 9,7), duration: 55, description: 'Description 2', topRated: false },
@@ -22,8 +21,6 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get('/api/getUsername', (req, res) => res.send({ courcesList: courcesList }))
 
-
-app.get('/api/getUsername', (req, res) => res.send({ courcesCollection }))
-
-app.listen(8080, () => console.log('Listening on port 8080!'))
+app.listen(8080)
