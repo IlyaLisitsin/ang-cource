@@ -16,13 +16,13 @@ export class CourceBorderDirective implements OnInit {
     if (this.creationDate < this.currentDate
       &&  this.countDays(this.creationDate, this.currentDate) <= 15) {
       this.el.nativeElement.style.backgroundColor = 'green'
-    } else if (this.creationDate.getTime() > this.currentDate.getTime()) {
+    } else if (this.creationDate > this.currentDate) {
       this.el.nativeElement.style.backgroundColor = 'blue'
     }
   }
 
   private countDays(firstDate, secondDate) {
-    return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)))
+    return Math.round(Math.abs((firstDate - secondDate)/(oneDay)))
   }
 }
 

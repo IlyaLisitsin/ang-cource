@@ -19,7 +19,7 @@ export class CourceCollectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.courceRemove = this.courceService.removeItem
+    // this.courceRemove = this.courceService.removeItem
   }
 
   openModal(index) {
