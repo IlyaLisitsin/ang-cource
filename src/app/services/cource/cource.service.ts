@@ -22,7 +22,7 @@ export class CourceService {
   }
 
   fethInitialCourceList() {
-    this.httpClient.get('http://localhost:8080/api/getUsername').pipe(
+    this.httpClient.get('http://localhost:8080/api/getCourceList').pipe(
       finalize(() => console.log('FETCH IS FINISHED'))
     ).subscribe(
       res => {
