@@ -26,7 +26,7 @@ export class CourceService {
       finalize(() => console.log('FETCH IS FINISHED'))
     ).subscribe(
       res => {
-        this._cources.next(res.courcesList)
+        this._cources.next(res['courcesList'])
       }
     )
   }
@@ -42,4 +42,5 @@ export class CourceService {
   // removeItem(id: number): void {
   //   this.courcesCollection = this.courcesCollection.filter(cource => cource.id !== id)
   // }
+
 }
