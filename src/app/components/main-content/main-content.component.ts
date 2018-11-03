@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Cource } from "../../models";
-import { CourceService } from "../../services";
+import { Cource } from '../../models';
+import { CourceService } from '../../services';
 
 @Component({
   selector: 'app-main-content',
@@ -28,5 +28,15 @@ export class MainContentComponent implements OnInit {
 
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
 
-  addCourceClick = () => console.log('Add cource clicked')
+  addCourceClick = () => {
+    const cource = {
+      'id': 1,
+      'title': 'AAAAAAAAAAA',
+      'creation': 'Mon Aug 20 2018 00:00:00 GMT+0300 (Moscow Standard Time)',
+      'duration': 95, 'description': 'ooooooooooooooooo',
+      'topRated': true
+    };
+
+    this.courceService.addCource(cource)
+  }
 }

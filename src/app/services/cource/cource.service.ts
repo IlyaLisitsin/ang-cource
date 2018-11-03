@@ -14,14 +14,14 @@ export class CourceService {
   constructor(
     private httpClient: HttpClient
   ) {
-    this.fethInitialCourceList()
+    this.fethCourceList()
   }
 
   get getCourcesList() {
     return this._cources
   }
 
-  fethInitialCourceList() {
+  fethCourceList() {
     this.httpClient.get('http://localhost:8080/api/getCourceList').pipe(
       finalize(() => console.log('FETCH IS FINISHED'))
     ).subscribe(
@@ -29,6 +29,13 @@ export class CourceService {
         this._cources.next(res['courcesList'])
       }
     )
+  }
+
+  addCource(newCource: Cource) {
+    this.httpClient.post('http://localhost:8080/api/addCource', newCource).pipe()
+      .subscribe(
+        res => this._cources.next(res['courcesList'])
+      )
   }
 
   // createCource(newCource: Cource) {
