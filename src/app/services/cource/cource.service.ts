@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Cource } from '../../models'
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { finalize } from "rxjs/operators";
+import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,11 @@ export class CourceService {
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )
+  }
+
+  downloadCourseListJSON$() {
+    const jsonGet$ = fromPromise(fetch('http://localhost:8080/api/getCourceList'));
+    return jsonGet$
   }
 
   // createCource(newCource: Cource) {

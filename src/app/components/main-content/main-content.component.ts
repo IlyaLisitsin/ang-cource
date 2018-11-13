@@ -14,6 +14,7 @@ export class MainContentComponent implements OnInit {
 
   courcesCollection: Array<Cource> = []
   filterConditionFromInput: string
+  url: string;
 
   constructor(
     private courceService: CourceService,
@@ -24,6 +25,11 @@ export class MainContentComponent implements OnInit {
     this.courceService.getCourcesList.forEach(value => {
       this.courcesCollection = value
     })
+
+    this.courceService.downloadCourseListJSON$().subscribe(data => data.blob()
+      .then(res => {
+        this.url = window.URL.createObjectURL(res);
+      }))
   }
 
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
