@@ -26,7 +26,7 @@ export class MainContentComponent implements OnInit {
       this.courcesCollection = value
     })
 
-    this.courceService.downloadCourseListJSON$().subscribe(data => data.blob()
+    this.courceService.downloadCourseListJSON$.subscribe(data => data.blob()
       .then(res => {
         this.url = window.URL.createObjectURL(res);
       }))
@@ -46,9 +46,9 @@ export class MainContentComponent implements OnInit {
   addCourceClick = () => {
     const cource = {
       'id': 1,
-      'title': 'AAAAAAAAAAA',
+      'title': 'New cource',
       'creation': 'Mon Aug 20 2018 00:00:00 GMT+0300 (Moscow Standard Time)',
-      'duration': 95, 'description': 'ooooooooooooooooo',
+      'duration': 95, 'description': 'Description of new cource',
       'topRated': true
     };
 

@@ -39,7 +39,7 @@ export class CourceService {
       )
   }
 
-  downloadCourseListJSON$() {
+  get downloadCourseListJSON$() {
     const jsonGet$ = fromPromise(fetch('http://localhost:8080/api/getCourceList'));
     return jsonGet$
   }
