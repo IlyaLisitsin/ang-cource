@@ -22,24 +22,47 @@ app.get('/api/getCourceList', (req, res) => {
   });
 })
 
-app.post('/api/addCource', (req, res) => {
-  const newCource = req.body
+app.post('/api/:action', (req, res) => {
+  switch (req.param('action')) {
+    case 'addCource': {
+      const newCource = req.body
 
-  fs.readFile(courcesUrl, (err, data) => {
-    if (err) throw err;
+      fs.readFile(courcesUrl, (err, data) => {
+        if (err) throw err;
 
-    const { courcesList } = JSON.parse(data)
+        const { courcesList } = JSON.parse(data)
 
-    courcesList.push(newCource)
-    const updatedCourceList = {
-      courcesList
+        courcesList.push(newCource)
+        const updatedCourceList = {
+          courcesList
+        }
+
+        fs.writeFile(courcesUrl, JSON.stringify(updatedCourceList), (err) => {
+          if (err) throw err;
+          res.send(JSON.stringify(updatedCourceList))
+        });
+      })
+      break
     }
+    case 'removeCource': {
+      const { idToRemove } = req.body
 
-    fs.writeFile(courcesUrl, JSON.stringify(updatedCourceList), (err) => {
-      if (err) throw err;
-      res.send(JSON.stringify(updatedCourceList))
-    });
-  })
+      fs.readFile(courcesUrl, (err, data) => {
+        if (err) throw err;
+
+        const { courcesList } = JSON.parse(data)
+
+        const updatedCourceList = {
+          courcesList: courcesList.filter(cource => cource.id !== idToRemove)
+        }
+
+        fs.writeFile(courcesUrl, JSON.stringify(updatedCourceList), (err) => {
+          if (err) throw err;
+          res.send(JSON.stringify(updatedCourceList))
+        });
+      })
+    }
+  }
 })
 
 app.listen(8080)

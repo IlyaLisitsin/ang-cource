@@ -11,16 +11,13 @@ export class CourceCollectionComponent implements OnInit {
   @Input() courcesCollection: any;
   @Input() filterConditionFromInput: string;
   activeModalCourceId: number;
-  courceRemove: any
 
   constructor(
     public ngxSmartModalService: NgxSmartModalService,
     private courceService: CourceService,
   ) {}
 
-  ngOnInit() {
-    // this.courceRemove = this.courceService.removeItem
-  }
+  ngOnInit() {}
 
   openModal(index) {
     this.activeModalCourceId = this.courcesCollection[index].id
@@ -28,7 +25,7 @@ export class CourceCollectionComponent implements OnInit {
   }
 
   removeCurrentCource() {
-    return () => this.courceRemove(this.activeModalCourceId)
+    return () => this.courceService.removeCource(this.activeModalCourceId)
   }
 
 }

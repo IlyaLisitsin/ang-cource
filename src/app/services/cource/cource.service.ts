@@ -39,21 +39,15 @@ export class CourceService {
       )
   }
 
+  removeCource(idToRemove: any) {
+    this.httpClient.post('http://localhost:8080/api/removeCource', { idToRemove }).pipe()
+      .subscribe(
+        res => this._cources.next(res['courcesList'])
+      )
+  }
+
   get downloadCourseListJSON$() {
     const jsonGet$ = fromPromise(fetch('http://localhost:8080/api/getCourceList'));
     return jsonGet$
   }
-
-  // createCource(newCource: Cource) {
-  //   return this.courcesCollection.push(newCource)
-  // }
-  //
-  // getItemById(id: number): Cource {
-  //   return this.courcesCollection.filter(cource => cource.id === id)[0]
-  // }
-  //
-  // removeItem(id: number): void {
-  //   this.courcesCollection = this.courcesCollection.filter(cource => cource.id !== id)
-  // }
-
 }
