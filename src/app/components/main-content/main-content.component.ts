@@ -32,6 +32,15 @@ export class MainContentComponent implements OnInit {
       }))
   }
 
+  startDownload() {
+    const link = document.createElement('a')
+    link.href = this.url
+    document.body.appendChild(link)
+    link.setAttribute('download', 'cources.json')
+    link.click()
+    document.body.removeChild(link)
+  }
+
   buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
 
   addCourceClick = () => {
