@@ -1,8 +1,8 @@
 export class Cource {
-  id: number
+  id: string
   title: string
   creation: Date | string
-  duration: number
+  duration: string
   description: string
   topRated?: boolean
 }

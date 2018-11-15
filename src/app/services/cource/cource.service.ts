@@ -41,14 +41,14 @@ export class CourceService {
   }
 
   addCource(newCource: Cource) {
-    this.httpClient.post('http://localhost:8080/api/addCource', newCource)
+    this.httpClient.put('http://localhost:8080/api/addCource', newCource)
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )
   }
 
   removeCource(idToRemove: any) {
-    this.httpClient.put('http://localhost:8080/api/removeCource', { idToRemove })
+    this.httpClient.delete(`http://localhost:8080/api/removeCource/${idToRemove}`)
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )

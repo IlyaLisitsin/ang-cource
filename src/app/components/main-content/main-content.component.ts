@@ -48,10 +48,10 @@ export class MainContentComponent implements OnInit {
 
   addCourceClick() {
     const cource = {
-      'id': 1,
+      'id': '1',
       'title': 'New cource',
       'creation': 'Mon Aug 20 2018 00:00:00 GMT+0300 (Moscow Standard Time)',
-      'duration': 95, 'description': 'Description of new cource',
+      'duration': '95', 'description': 'Description of new cource',
       'topRated': true
     };
 

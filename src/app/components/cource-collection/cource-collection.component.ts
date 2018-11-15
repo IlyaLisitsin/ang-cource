@@ -11,7 +11,7 @@ import {Cource} from "../../models";
 export class CourceCollectionComponent implements OnInit {
   @Input() courcesCollection: Cource[];
   @Input() filterConditionFromInput: string;
-  activeModalCourceId: number;
+  activeModalCourceId: string;
 
   constructor(
     public ngxSmartModalService: NgxSmartModalService,

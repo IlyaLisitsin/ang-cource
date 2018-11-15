@@ -19,8 +19,8 @@ const courcesJsonService = new FileService()
 
 app.get('/api/getCourceList', (req, res) => courcesJsonService.getAll(courcesUrl, res))
 
-app.post('/api/addCource', (req, res) => courcesJsonService.addNew(courcesUrl, res, req.body))
+app.put('/api/addCource', (req, res) => courcesJsonService.addNew(courcesUrl, res, req.body))
 
-app.put('/api/removeCource', ({ body: {idToRemove} }, res) =>courcesJsonService.removeCurrent(courcesUrl, res, idToRemove))
+app.delete('/api/removeCource/:idToRemove',({ params: {idToRemove} }, res) => courcesJsonService.removeCurrent(courcesUrl, res, idToRemove))
 
 app.listen(8080)
