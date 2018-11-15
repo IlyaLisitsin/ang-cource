@@ -1,4 +1,4 @@
-import {Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { AuthorizationService } from "../../services";
 
 @Component({
@@ -7,19 +7,16 @@ import { AuthorizationService } from "../../services";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  @Input() loginFromLoginPage: any
+  @Input() loginFromLoginPage: EventEmitter<string>
 
-  login: any
+  constructor(
+    private authService: AuthorizationService
+  ) {}
 
-  constructor( private authService: AuthorizationService) {
-    this.login = authService.login
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   loginFormSubmit() {
-    this.login({ id: '123213', firstName: 'Niko', lastName: 'Bobokin' })
+    this.authService.login({ id: '123213', firstName: 'Niko', lastName: 'Bobokin' })
     this.loginFromLoginPage.emit()
   }
 

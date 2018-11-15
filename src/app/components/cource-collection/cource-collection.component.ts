@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {NgxSmartModalService} from "ngx-smart-modal";
 import {CourceService} from "../../services";
+import {Cource} from "../../models";
 
 @Component({
   selector: 'app-cource-collection',
@@ -8,7 +9,7 @@ import {CourceService} from "../../services";
   styleUrls: ['./cource-collection.component.scss']
 })
 export class CourceCollectionComponent implements OnInit {
-  @Input() courcesCollection: any;
+  @Input() courcesCollection: Cource[];
   @Input() filterConditionFromInput: string;
   activeModalCourceId: number;
 

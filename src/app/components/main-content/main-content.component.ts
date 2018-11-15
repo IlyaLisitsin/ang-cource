@@ -23,6 +23,7 @@ export class MainContentComponent implements OnInit {
 
   ngOnInit() {
     this.courceService.getCourcesList.forEach(value => {
+      // @ts-ignore
       this.courcesCollection = value
     })
 
@@ -41,9 +42,11 @@ export class MainContentComponent implements OnInit {
     document.body.removeChild(link)
   }
 
-  buttonClick = (inputValue) => this.filterConditionFromInput = inputValue
+  buttonClick(inputValue) {
+    this.filterConditionFromInput = inputValue
+  }
 
-  addCourceClick = () => {
+  addCourceClick() {
     const cource = {
       'id': 1,
       'title': 'New cource',

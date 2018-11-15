@@ -7,8 +7,8 @@ const oneDay = 24 * 60 * 60 * 1000
 })
 
 export class CourceBorderDirective implements OnInit {
-  @Input() creationDate: any
-  currentDate: any = new Date()
+  @Input() creationDate: Date
+  currentDate: Date = new Date()
 
   constructor(private el: ElementRef) {}
 

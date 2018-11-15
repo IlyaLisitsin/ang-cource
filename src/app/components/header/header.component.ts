@@ -10,7 +10,7 @@ import { AuthorizationService } from "../../services";
 
 export class HeaderComponent implements OnInit {
   @Input() isAuth: string
-  @Output() logoutFromHeader = new EventEmitter<any>()
+  @Output() logoutFromHeader = new EventEmitter<Event>()
   userLogin: User
   getConsumerInfo: any
 

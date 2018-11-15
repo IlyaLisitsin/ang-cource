@@ -8,15 +8,15 @@
       </div>
       <button (click)="addCourceClick()">Add cource</button>
     </div>
-    <div *ngIf="courcesCollection.length">
+    <div *ngIf="courcesCollection && courcesCollection.length">
       <app-cource-collection
         [courcesCollection]="courcesCollection"
         [filterConditionFromInput]="filterConditionFromInput"
       ></app-cource-collection>
     </div>
-    <div *ngIf="!courcesCollection.length">
-      <h2>No data. Feel free to add new cource</h2>
-    </div>
+    <!--<div *ngIf="courcesCollection && !courcesCollection.length">-->
+      <!--<h2>No data. Feel free to add new cource</h2>-->
+    <!--</div>-->
   </div>
   <app-login-page *ngIf="!isAuth" [loginFromLoginPage]="loginFromLoginPage"></app-login-page>
 </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Cource } from '../../models'
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs";
-import { finalize } from "rxjs/operators";
+import { BehaviorSubject, of } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable({
@@ -10,7 +10,7 @@ import { fromPromise } from "rxjs/internal-compatibility";
 })
 
 export class CourceService {
-  private _cources: BehaviorSubject<any> = new BehaviorSubject(Cource)
+  private _cources: BehaviorSubject<object> = new BehaviorSubject(Cource)
 
   constructor(
     private httpClient: HttpClient
@@ -24,23 +24,31 @@ export class CourceService {
 
   fethCourceList() {
     this.httpClient.get('http://localhost:8080/api/getCourceList').pipe(
-      finalize(() => console.log('FETCH IS FINISHED'))
+      catchError(err => {
+        return of(err.message)
+      })
     ).subscribe(
       res => {
+        if (typeof res === 'string') {
+          this._cources.next([{
+              title: res
+            }])
+          this._cources.complete()
+        }
         this._cources.next(res['courcesList'])
       }
     )
   }
 
   addCource(newCource: Cource) {
-    this.httpClient.post('http://localhost:8080/api/addCource', newCource).pipe()
+    this.httpClient.post('http://localhost:8080/api/addCource', newCource)
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )
   }
 
   removeCource(idToRemove: any) {
-    this.httpClient.post('http://localhost:8080/api/removeCource', { idToRemove }).pipe()
+    this.httpClient.put('http://localhost:8080/api/removeCource', { idToRemove })
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )

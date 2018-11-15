@@ -5,11 +5,7 @@ import { User } from "../../models";
   providedIn: 'root'
 })
 export class AuthorizationService {
-  test: any
-
-  constructor() {
-    this.test = 12
-  }
+  constructor() {}
 
   login(user: User) {
     localStorage.setItem('angCourseUser', JSON.stringify(user))
