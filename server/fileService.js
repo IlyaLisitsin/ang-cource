@@ -10,7 +10,7 @@ class FileService {
 
   addNew(path, res, newCource) {
     fs.readFile(path, (err, data) => {
-      if (err) throw err
+      if (err) res.send(`Server error have been occured: ${err}`)
 
       const { courcesList } = JSON.parse(data)
 
@@ -20,7 +20,7 @@ class FileService {
       }
 
       fs.writeFile(path, JSON.stringify(updatedCourceList), (err) => {
-        if (err) throw err
+        if (err) res.send(`Server error have been occured: ${err}`)
         res.json(updatedCourceList)
       })
     })
@@ -28,7 +28,7 @@ class FileService {
 
   removeCurrent(path, res, idToRemove) {
     fs.readFile(path, (err, data) => {
-      if (err) throw err;
+      if (err) res.send(`Server error have been occured: ${err}`)
 
       const { courcesList } = JSON.parse(data)
 
@@ -37,7 +37,7 @@ class FileService {
       }
 
       fs.writeFile(path, JSON.stringify(updatedCourceList), (err) => {
-        if (err) throw err;
+        if (err) res.send(`Server error have been occured: ${err}`)
         res.json(updatedCourceList)
       });
     })
