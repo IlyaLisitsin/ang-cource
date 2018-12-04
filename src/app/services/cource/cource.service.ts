@@ -23,7 +23,7 @@ export class CourceService {
   }
 
   fethCourceList() {
-    this.httpClient.get('http://localhost:8080/api/getCourceList').pipe(
+    this.httpClient.get('http://localhost:8080/api/cources').pipe(
       catchError(err => {
         return of(err.message)
       })
@@ -41,21 +41,21 @@ export class CourceService {
   }
 
   addCource(newCource: Cource) {
-    this.httpClient.put('http://localhost:8080/api/addCource', newCource)
+    this.httpClient.put('http://localhost:8080/api/cources', newCource)
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )
   }
 
-  removeCource(idToRemove: any) {
-    this.httpClient.delete(`http://localhost:8080/api/removeCource/${idToRemove}`)
+  removeCource(id: any) {
+    this.httpClient.delete(`http://localhost:8080/api/cources/${id}`)
       .subscribe(
         res => this._cources.next(res['courcesList'])
       )
   }
 
   get downloadCourseListJSON$() {
-    const jsonGet$ = fromPromise(fetch('http://localhost:8080/api/getCourceList'));
+    const jsonGet$ = fromPromise(fetch('http://localhost:8080/api/cources'));
     return jsonGet$
   }
 }

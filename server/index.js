@@ -15,12 +15,12 @@ app.use((req, res, next) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const courcesJsonService = new FileService()
+const courcesJsonService = new FileService(courcesUrl)
 
-app.get('/api/getCourceList', (req, res) => courcesJsonService.getAll(courcesUrl, res))
+app.get('/api/cources', (req, res) => courcesJsonService.getAll(res))
 
-app.put('/api/addCource', (req, res) => courcesJsonService.addNew(courcesUrl, res, req.body))
+app.put('/api/cources', (req, res) => courcesJsonService.addNew(res, req.body))
 
-app.delete('/api/removeCource/:idToRemove',({ params: {idToRemove} }, res) => courcesJsonService.removeCurrent(courcesUrl, res, idToRemove))
+app.delete('/api/cources/:id',({ params: {id} }, res) => courcesJsonService.removeCurrent(res, id))
 
 app.listen(8080)

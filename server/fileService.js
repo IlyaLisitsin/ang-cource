@@ -1,15 +1,19 @@
 const fs = require('fs')
 
 class FileService {
-  getAll(path, res) {
-    fs.readFile(path, (err, data) => {
+  constructor(path) {
+    this.path = path
+  }
+
+  getAll(res) {
+    fs.readFile(this.path, (err, data) => {
       if (err) res.send(`Server error have been occured: ${err}`)
       res.send(data)
     })
   }
 
-  addNew(path, res, newCource) {
-    fs.readFile(path, (err, data) => {
+  addNew(res, newCource) {
+    fs.readFile(this.path, (err, data) => {
       if (err) res.send(`Server error have been occured: ${err}`)
 
       const { courcesList } = JSON.parse(data)
@@ -19,15 +23,15 @@ class FileService {
         courcesList
       }
 
-      fs.writeFile(path, JSON.stringify(updatedCourceList), (err) => {
+      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (err) => {
         if (err) res.send(`Server error have been occured: ${err}`)
         res.json(updatedCourceList)
       })
     })
   }
 
-  removeCurrent(path, res, idToRemove) {
-    fs.readFile(path, (err, data) => {
+  removeCurrent(res, idToRemove) {
+    fs.readFile(this.path, (err, data) => {
       if (err) res.send(`Server error have been occured: ${err}`)
 
       const { courcesList } = JSON.parse(data)
@@ -36,7 +40,7 @@ class FileService {
         courcesList: courcesList.filter(cource => cource.id !== idToRemove)
       }
 
-      fs.writeFile(path, JSON.stringify(updatedCourceList), (err) => {
+      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (err) => {
         if (err) res.send(`Server error have been occured: ${err}`)
         res.json(updatedCourceList)
       });
