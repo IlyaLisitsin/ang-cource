@@ -6,9 +6,9 @@
         <input #filterInput placeholder="Name fragment or data">
         <button (click)="buttonClick(filterInput.value)">Search</button>
       </div>
-      <button (click)="addCourceClick()">Add cource</button>
+      <button (click)="toggleCourceStatus()">Add cource</button>
     </div>
-    <div *ngIf="courcesCollection && courcesCollection.length">
+    <div *ngIf="courcesCollection && courcesCollection.length && !isAddCource">
       <app-cource-collection
         [courcesCollection]="courcesCollection"
         [filterConditionFromInput]="filterConditionFromInput"
@@ -17,6 +17,15 @@
     <!--<div *ngIf="courcesCollection && !courcesCollection.length">-->
       <!--<h2>No data. Feel free to add new cource</h2>-->
     <!--</div>-->
+    <div *ngIf="isAddCource">
+      <input placeholder="Title" [(ngModel)]="title">
+      <textarea [(ngModel)]="description">Descriptiuon</textarea>
+      <input type="date" [(ngModel)]="date">
+      <input placeholder="duration" type="number" value="0" [(ngModel)]="duration"><span>{{duration | transformDuration}}</span>
+      <div>authors comp</div>
+      <button (click)="addNewCource()">save</button>
+      <button (click)="toggleCourceStatus()">cancel</button>
+    </div>
   </div>
   <app-login-page *ngIf="!isAuth" [loginFromLoginPage]="loginFromLoginPage"></app-login-page>
 </div>

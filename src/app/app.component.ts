@@ -9,6 +9,7 @@ import { AuthorizationService } from "./services";
 
 export class AppComponent implements OnInit {
   isAuth: boolean
+  isAddCource: boolean = false
 
   constructor(
     private authService: AuthorizationService,

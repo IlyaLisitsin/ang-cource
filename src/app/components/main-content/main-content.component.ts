@@ -10,11 +10,16 @@ import { CourceService } from '../../services';
 
 export class MainContentComponent implements OnInit {
   @Input() isAuth: boolean;
+  @Input() isAddCource: boolean;
   @Output() loginFromLoginPage = new EventEmitter()
 
   courcesCollection: Array<Cource> = []
   filterConditionFromInput: string
   url: string;
+  duration: number = 0;
+  title: string = '';
+  description: string = '';
+  date: string = '';
 
   constructor(
     private courceService: CourceService,
@@ -46,15 +51,25 @@ export class MainContentComponent implements OnInit {
     this.filterConditionFromInput = inputValue
   }
 
-  addCourceClick() {
-    const cource = {
-      'id': '1',
-      'title': 'New cource',
-      'creation': 'Mon Aug 20 2018 00:00:00 GMT+0300 (Moscow Standard Time)',
-      'duration': '95', 'description': 'Description of new cource',
-      'topRated': true
-    };
-
-    this.courceService.addCource(cource)
+  toggleCourceStatus() {
+    this.isAddCource = !this.isAddCource
   }
+
+  addNewCource() {
+      const cource = {
+        'id': String(Math.random()),
+        'title': this.title,
+        'creation': new Date(this.date),
+        'duration': String(this.duration),
+        'description': this.description,
+        'topRated': true
+      };
+
+      this.courceService.addCource(cource)
+      this.toggleCourceStatus()
+
+  }
+
+
+
 }

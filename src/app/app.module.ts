@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     NgxSmartModalModule.forRoot()
   ],
   declarations: [
