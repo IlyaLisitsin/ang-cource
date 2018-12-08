@@ -10,7 +10,7 @@ import { fromPromise } from "rxjs/internal-compatibility";
 })
 
 export class CourceService {
-  private _cources: BehaviorSubject<object> = new BehaviorSubject(Cource)
+  private cources$: BehaviorSubject<object> = new BehaviorSubject(Cource)
 
   constructor(
     private httpClient: HttpClient
@@ -19,7 +19,7 @@ export class CourceService {
   }
 
   get getCourcesList() {
-    return this._cources
+    return this.cources$
   }
 
   fethCourceList() {
@@ -30,27 +30,31 @@ export class CourceService {
     ).subscribe(
       res => {
         if (typeof res === 'string') {
-          this._cources.next([{
+          this.cources$.next([{
               title: res
             }])
-          this._cources.complete()
+          this.cources$.complete()
         }
-        this._cources.next(res['courcesList'])
+        this.cources$.next(res['courcesList'])
       }
     )
+  }
+
+  getParticularCource(id) {
+    return this.httpClient.get(`http://localhost:8080/api/cources?id=${id}`)
   }
 
   addCource(newCource: Cource) {
     this.httpClient.put('http://localhost:8080/api/cources', newCource)
       .subscribe(
-        res => this._cources.next(res['courcesList'])
+        res => this.cources$.next(res['courcesList'])
       )
   }
 
   removeCource(id: any) {
     this.httpClient.delete(`http://localhost:8080/api/cources/${id}`)
       .subscribe(
-        res => this._cources.next(res['courcesList'])
+        res => this.cources$.next(res['courcesList'])
       )
   }
 

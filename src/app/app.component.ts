@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorizationService } from "./services";
 
 @Component({
   selector: 'app-root',
@@ -8,23 +7,7 @@ import { AuthorizationService } from "./services";
 })
 
 export class AppComponent implements OnInit {
-  isAuth: boolean
-  isAddCource: boolean = false
+  constructor() {}
 
-  constructor(
-    private authService: AuthorizationService,
-  ) {}
-
-  ngOnInit() {
-    this.isAuth = this.authService.isAuthenticated()
-  }
-
-  logoutFromHeader() {
-    this.authService.logout()
-    this.isAuth = this.authService.isAuthenticated()
-  }
-
-  loginFromLoginPage() {
-    this.isAuth = this.authService.isAuthenticated()
-  }
+  ngOnInit() {}
 }

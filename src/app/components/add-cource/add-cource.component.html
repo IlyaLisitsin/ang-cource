@@ -1,0 +1,9 @@
+<div>
+  <input placeholder="Title" [(ngModel)]="title">
+  <textarea [(ngModel)]="description">Descriptiuon</textarea>
+  <input type="date" [(ngModel)]="date">
+  <input placeholder="duration" type="number" value="0" [(ngModel)]="duration"><span>{{duration | transformDuration}}</span>
+  <div>authors comp</div>
+  <button (click)="addNewCource()">save</button>
+  <button routerLink="../">cancel</button>
+</div>

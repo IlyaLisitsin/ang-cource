@@ -1,0 +1,32 @@
+<div *ngIf="cource$ | async as cource">
+  <p>id: <span #id>{{ cource.id }}</span></p>
+  <p> Title:
+    <input #title [value]="cource.title">
+  </p>
+  <p>
+    Description:
+    <input #description [value]="cource.description">
+  </p>
+  <p>
+    Creation:
+    <input #creation type="date" [value]="cource.creation | date: 'yyyy-MM-dd'">
+  </p>
+  <p> Duration:
+    <input #duration [value]="cource.duration" [(ngModel)]="cource.duration">
+    <span>{{ cource.duration | transformDuration }}</span>
+  </p>
+  <div> Top rated:
+    <label for="isTopRated">
+      <span>Yes</span>
+      <input type="radio" id="isTopRated" name="topRated" [value]="true" [checked]="cource.topRated" #isTopRated ([ngModel])="topRated">
+    </label>
+
+    <label for="isNotTopRated">
+      <span>No</span>
+      <input type="radio" id="isNotTopRated" name="topRated" [value]="false" [checked]="!cource.topRated" #isNotTopRated ([ngModel])="topRated">
+    </label>
+  </div>
+
+  <button (click)="saveChanges()">save changes</button>
+  <button routerLink="../">cancel</button>
+</div>

@@ -1,3 +1,8 @@
-<div class="breadcrumbs">
-  breadcrumbs
+<div class="breadcrumbs" *ngIf="breadcrumbsCollection.length">
+  <span *ngFor="let crumb of breadcrumbsCollection; last as isLast">
+    <span *ngIf="!isLast; else lastCrumb"><a [routerLink]="crumb.path">{{ crumb.path }}</a> -> </span>
+    <ng-template #lastCrumb>
+      <span>{{ crumb.path }}</span>
+    </ng-template>
+  </span>
 </div>

@@ -1,31 +1,16 @@
 <div>
-  <button (click)="startDownload()">Download cources list</button>
-  <div *ngIf="isAuth">
     <div class="user-panel">
+      <button (click)="startDownload()">Download cources list</button>
       <div class="search-box">
         <input #filterInput placeholder="Name fragment or data">
         <button (click)="buttonClick(filterInput.value)">Search</button>
       </div>
-      <button (click)="toggleCourceStatus()">Add cource</button>
+      <button routerLink="/cources/add">Add cource</button>
     </div>
-    <div *ngIf="courcesCollection && courcesCollection.length && !isAddCource">
+    <div *ngIf="courcesCollection && courcesCollection.length">
       <app-cource-collection
         [courcesCollection]="courcesCollection"
         [filterConditionFromInput]="filterConditionFromInput"
       ></app-cource-collection>
     </div>
-    <!--<div *ngIf="courcesCollection && !courcesCollection.length">-->
-      <!--<h2>No data. Feel free to add new cource</h2>-->
-    <!--</div>-->
-    <div *ngIf="isAddCource">
-      <input placeholder="Title" [(ngModel)]="title">
-      <textarea [(ngModel)]="description">Descriptiuon</textarea>
-      <input type="date" [(ngModel)]="date">
-      <input placeholder="duration" type="number" value="0" [(ngModel)]="duration"><span>{{duration | transformDuration}}</span>
-      <div>authors comp</div>
-      <button (click)="addNewCource()">save</button>
-      <button (click)="toggleCourceStatus()">cancel</button>
-    </div>
-  </div>
-  <app-login-page *ngIf="!isAuth" [loginFromLoginPage]="loginFromLoginPage"></app-login-page>
 </div>

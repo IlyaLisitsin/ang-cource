@@ -1,6 +1,6 @@
 <div class="page-container">
-  <app-header [isAuth]="isAuth" (logoutFromHeader)="logoutFromHeader()"></app-header>
-  <app-main-content [isAuth]="isAuth" [isAddCource]="isAddCource" (loginFromLoginPage)="loginFromLoginPage()"></app-main-content>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>
 

@@ -16,10 +16,6 @@ export class MainContentComponent implements OnInit {
   courcesCollection: Array<Cource> = []
   filterConditionFromInput: string
   url: string;
-  duration: number = 0;
-  title: string = '';
-  description: string = '';
-  date: string = '';
 
   constructor(
     private courceService: CourceService,
@@ -51,25 +47,8 @@ export class MainContentComponent implements OnInit {
     this.filterConditionFromInput = inputValue
   }
 
-  toggleCourceStatus() {
-    this.isAddCource = !this.isAddCource
-  }
-
-  addNewCource() {
-      const cource = {
-        'id': String(Math.random()),
-        'title': this.title,
-        'creation': new Date(this.date),
-        'duration': String(this.duration),
-        'description': this.description,
-        'topRated': true
-      };
-
-      this.courceService.addCource(cource)
-      this.toggleCourceStatus()
-
-  }
-
-
+  // toggleCourceStatus() {
+  //   this.isAddCource = !this.isAddCource
+  // }
 
 }

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { User } from '../../models'
-import { AuthorizationService } from "../../services";
+import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -11,23 +11,17 @@ import { AuthorizationService } from "../../services";
 export class HeaderComponent implements OnInit {
   @Input() isAuth: string
   @Output() logoutFromHeader = new EventEmitter<Event>()
-  userLogin: User
-  getConsumerInfo: any
 
-  constructor(private authService: AuthorizationService) {
-    this.getConsumerInfo = authService.getConsumerInfo
-    this.userLogin = this.getConsumerInfo()
+  constructor(
+    private authService: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  logoutClick() {
-    this.logoutFromHeader.emit()
+  logout() {
+    this.authService.logout()
   }
 
-  login() {
-    console.log(3324324)
-  }
 
 }

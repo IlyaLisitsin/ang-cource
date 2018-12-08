@@ -1,4 +1,8 @@
 :host {
+  header {
+    border-bottom: 2px solid red;
+  }
+
   .header-top {
     display: flex;
     justify-content: space-between;

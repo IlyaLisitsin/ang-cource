@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const courcesJsonService = new FileService(courcesUrl)
 
-app.get('/api/cources', (req, res) => courcesJsonService.getAll(res))
+app.get('/api/cources', (req, res) => courcesJsonService.getAll(req, res))
 
 app.put('/api/cources', (req, res) => courcesJsonService.addNew(res, req.body))
 

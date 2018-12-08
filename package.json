@@ -8,7 +8,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "node server",
-    "start": "concurrently \"nodemon server\" \"ng serve\""
+    "start": "concurrently \"nodemon server\" \"ng serve --port=4400\""
   },
   "private": true,
   "dependencies": {

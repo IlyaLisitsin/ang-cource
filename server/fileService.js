@@ -5,9 +5,18 @@ class FileService {
     this.path = path
   }
 
-  getAll(res) {
+  getAll(req, res) {
     fs.readFile(this.path, (err, data) => {
       if (err) res.send(`Server error have been occured: ${err}`)
+      if (req.query.id) {
+        const { courcesList } = JSON.parse(data)
+
+        const particularCource = courcesList.find(cource => cource.id === req.query.id)
+
+        res.send(particularCource)
+        return
+      }
+
       res.send(data)
     })
   }
@@ -16,9 +25,14 @@ class FileService {
     fs.readFile(this.path, (err, data) => {
       if (err) res.send(`Server error have been occured: ${err}`)
 
-      const { courcesList } = JSON.parse(data)
+      let { courcesList } = JSON.parse(data)
 
-      courcesList.push(newCource)
+      if (courcesList.find(cource => cource.id === newCource.id)) {
+        courcesList = courcesList.map(cource => cource.id === newCource.id ? newCource : cource)
+      } else {
+        courcesList.push(newCource)
+      }
+
       const updatedCourceList = {
         courcesList
       }

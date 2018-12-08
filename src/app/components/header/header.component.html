@@ -1,10 +1,10 @@
 <header>
   <div class="header-top">
     <div class="logo"></div>
-    <div *ngIf="isAuth" class="login-panel">
-      <div>{{userLogin.firstName}} {{userLogin.lastName}}</div>
-      <button (click)="logoutClick()">Log out</button>
+    <div class="login-panel">
+      <!--<div>{{userLogin.firstName}} {{userLogin.lastName}}</div>-->
+      <button (click)="logout()">Log out</button>
     </div>
   </div>
-  <app-breadcrumbs *ngIf="isAuth"></app-breadcrumbs>
+  <app-breadcrumbs></app-breadcrumbs>
 </header>
