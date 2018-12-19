@@ -6,24 +6,27 @@ class FileService {
   }
 
   getAll(req, res) {
-    fs.readFile(this.path, (err, data) => {
-      if (err) res.send(`Server error have been occured: ${err}`)
-      if (req.query.id) {
-        const { courcesList } = JSON.parse(data)
-
-        const particularCource = courcesList.find(cource => cource.id === req.query.id)
-
-        res.send(particularCource)
-        return
-      }
-
+    fs.readFile(this.path, (error, data) => {
+      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
       res.send(data)
     })
   }
 
+  getParticular(id, res) {
+    fs.readFile(this.path, (error, data) => {
+      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
+        const { courcesList } = JSON.parse(data)
+
+        const particularCource = courcesList.find(cource => cource.id === id)
+
+        res.send(particularCource)
+    })
+
+  }
+
   addNew(res, newCource) {
-    fs.readFile(this.path, (err, data) => {
-      if (err) res.send(`Server error have been occured: ${err}`)
+    fs.readFile(this.path, (error, data) => {
+      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
 
       let { courcesList } = JSON.parse(data)
 
@@ -37,16 +40,16 @@ class FileService {
         courcesList
       }
 
-      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (err) => {
-        if (err) res.send(`Server error have been occured: ${err}`)
+      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (error) => {
+        if (error) res.send({ error: `Server erroror have been occured: ${error}` })
         res.json(updatedCourceList)
       })
     })
   }
 
   removeCurrent(res, idToRemove) {
-    fs.readFile(this.path, (err, data) => {
-      if (err) res.send(`Server error have been occured: ${err}`)
+    fs.readFile(this.path, (error, data) => {
+      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
 
       const { courcesList } = JSON.parse(data)
 
@@ -54,8 +57,8 @@ class FileService {
         courcesList: courcesList.filter(cource => cource.id !== idToRemove)
       }
 
-      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (err) => {
-        if (err) res.send(`Server error have been occured: ${err}`)
+      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (error) => {
+        if (error) res.send({ error: `Server erroror have been occured: ${error}` })
         res.json(updatedCourceList)
       });
     })

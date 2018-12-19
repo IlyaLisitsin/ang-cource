@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Cource } from '../../models'
+import { Cource } from '../models'
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
+import { NgxSmartModalService } from "ngx-smart-modal";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CourceService {
   private cources$: BehaviorSubject<object> = new BehaviorSubject(Cource)
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    public ngxSmartModalService: NgxSmartModalService,
   ) {
     this.fethCourceList()
   }
@@ -24,24 +26,20 @@ export class CourceService {
 
   fethCourceList() {
     this.httpClient.get('http://localhost:8080/api/cources').pipe(
-      catchError(err => {
-        return of(err.message)
+      catchError(error => {
+        this.ngxSmartModalService.setModalData({ data: error.message }, 'errorModal');
+        this.ngxSmartModalService.getModal('errorModal').open()
+        return of(error.message)
       })
     ).subscribe(
       res => {
-        if (typeof res === 'string') {
-          this.cources$.next([{
-              title: res
-            }])
-          this.cources$.complete()
-        }
         this.cources$.next(res['courcesList'])
       }
     )
   }
 
   getParticularCource(id) {
-    return this.httpClient.get(`http://localhost:8080/api/cources?id=${id}`)
+    return this.httpClient.get(`http://localhost:8080/api/cources/${id}`)
   }
 
   addCource(newCource: Cource) {

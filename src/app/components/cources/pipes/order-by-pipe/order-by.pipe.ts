@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Cource} from "../models";
+import { Cource } from "../../models";
 
 @Pipe({
   name: 'orderBy'

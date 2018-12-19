@@ -1,1 +1,1 @@
-export * from './cource/cource.service'
+export * from '../components/cources/services/cource.service'

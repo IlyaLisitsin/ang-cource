@@ -19,6 +19,8 @@ const courcesJsonService = new FileService(courcesUrl)
 
 app.get('/api/cources', (req, res) => courcesJsonService.getAll(req, res))
 
+app.get('/api/cources/:id', ({ params: {id} }, res) => courcesJsonService.getParticular(id, res))
+
 app.put('/api/cources', (req, res) => courcesJsonService.addNew(res, req.body))
 
 app.delete('/api/cources/:id',({ params: {id} }, res) => courcesJsonService.removeCurrent(res, id))

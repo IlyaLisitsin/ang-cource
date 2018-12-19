@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {NgxSmartModalService} from "ngx-smart-modal";
-import {CourceService} from "../../services";
-import {Cource} from "../../models";
+import { NgxSmartModalService } from "ngx-smart-modal";
+import { CourceService } from "../../../../services";
+import { Cource } from '../../models'
 
 @Component({
   selector: 'app-cource-collection',

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {Observable} from "rxjs";
 import { switchMap } from "rxjs/operators";
-import {CourceService} from "../../services";
+import {CourceService} from "../../../../services";
 
 @Component({
   selector: 'app-edit-cource',

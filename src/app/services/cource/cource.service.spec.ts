@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { CourceService } from './cource.service';
+import { CourceService } from '../../components/cources/services/cource.service';
 
 describe('CourceService', () => {
   beforeEach(() => {

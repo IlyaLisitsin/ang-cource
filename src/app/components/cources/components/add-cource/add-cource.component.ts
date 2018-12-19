@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CourceService} from "../../services";
+import { CourceService } from "../../../../services";
 
 @Component({
   selector: 'app-add-cource',
@@ -30,7 +30,5 @@ export class AddCourceComponent implements OnInit {
     };
 
     this.courceService.addCource(cource)
-    // this.toggleCourceStatus()
-
   }
 }
