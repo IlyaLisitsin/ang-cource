@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {Observable} from "rxjs";
 import { switchMap } from "rxjs/operators";
 import {CourceService} from "../../../../services";
+import {Cource} from "../../models";
 
 @Component({
   selector: 'app-edit-cource',
@@ -11,14 +12,8 @@ import {CourceService} from "../../../../services";
 })
 
 export class EditCourceComponent implements OnInit {
-  @ViewChild('title') title: ElementRef;
-  @ViewChild('description') description: ElementRef;
-  @ViewChild('creation') creation: ElementRef;
-  @ViewChild('isTopRated') isTopRated: ElementRef;
-  @ViewChild('duration') duration: ElementRef;
-  @ViewChild('id') id: ElementRef;
-
   cource$: Observable<object>
+  cource: any
 
   constructor(
     private route: ActivatedRoute,
@@ -34,19 +29,26 @@ export class EditCourceComponent implements OnInit {
 
     this.cource$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.courceSrv.getParticularCource(params.get('id')),
-      )
+        {
+          return this.courceSrv.getParticularCource(params.get('id'))
+        },
+      ),
     )
+
+    this.cource$.subscribe(
+      cource => this.cource = cource
+    )
+
   }
 
   saveChanges() {
     this.courceSrv.addCource({
-      id: this.id.nativeElement.innerText,
-      title: this.title.nativeElement.value,
-      creation: String(new Date(this.creation.nativeElement.value)),
-      topRated: this.isTopRated.nativeElement.checked,
-      duration: this.duration.nativeElement.value,
-      description: this.description.nativeElement.value,
+      id: this.cource.id,
+      title: this.cource.title,
+      creation: new Date(String(this.cource.creation)),
+      topRated: this.cource.topRated,
+      duration: this.cource.duration,
+      description: this.cource.description,
     })
 
     this.router.navigate(['../'])
