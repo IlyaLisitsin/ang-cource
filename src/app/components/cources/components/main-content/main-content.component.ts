@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cource } from '../../models';
-import { CourceService } from '../../../../services';
+import { CourceService } from "../../services/cource.service";
 
 @Component({
   selector: 'app-main-content',

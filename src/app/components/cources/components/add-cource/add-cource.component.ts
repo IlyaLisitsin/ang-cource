@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourceService } from "../../../../services";
+import { CourceService} from "../../services/cource.service";
 
 @Component({
   selector: 'app-add-cource',

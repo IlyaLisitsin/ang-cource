@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {State} from "../../store/reducers";
+import * as AuthActions from '../../store/actions/auth'
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +15,8 @@ export class AuthService {
   redirectUrl: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store<State>,
   ) {}
 
   login(): Observable<boolean> {
@@ -25,6 +29,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this.store.dispatch(new AuthActions.SignOut)
     this.isLoggedIn = false;
     this.router.navigate(['/login'])
   }

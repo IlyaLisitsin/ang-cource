@@ -16,6 +16,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
+import { AppStoreModule } from "./app-store.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import { ErrorModalComponent } from './components/modals/error-modal/error-modal
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    AppStoreModule,
+    SharedModule,
     RouterModule,
     MainContentModule,
     NgxSmartModalModule.forRoot()
