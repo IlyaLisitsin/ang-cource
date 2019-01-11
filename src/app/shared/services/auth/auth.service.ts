@@ -20,6 +20,7 @@ export class AuthService {
   ) {}
 
   login(): Observable<boolean> {
+    this.store.dispatch(new AuthActions.SignIn)
     return of(true).pipe(
       tap(val => {
         this.isLoggedIn = true
@@ -30,7 +31,7 @@ export class AuthService {
 
   logout(): void {
     this.store.dispatch(new AuthActions.SignOut)
-    this.isLoggedIn = false;
+    this.isLoggedIn = false
     this.router.navigate(['/login'])
   }
 }
