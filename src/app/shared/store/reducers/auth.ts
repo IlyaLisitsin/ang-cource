@@ -1,4 +1,7 @@
 import * as AuthActions from '../actions/auth'
+import {createSelector} from "@ngrx/store";
+
+import { selectRootState } from "./root-selector";
 
 export interface AuthState {
   isLogged: boolean,
@@ -21,3 +24,5 @@ export function reducer(state = initialState, { payload, type }: AuthActions.Act
   }
 }
 
+export const getAuthState = createSelector(selectRootState, state => state.auth)
+export const getIsLogged = createSelector(getAuthState, state => state.isLogged)

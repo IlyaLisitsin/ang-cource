@@ -22,7 +22,6 @@ const initialState = {};
   ],
   exports: [],
   providers: [
-    // { provide: reducerToken, useValue: reducers },
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
 })

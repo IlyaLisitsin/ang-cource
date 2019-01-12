@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { User } from '../../models'
-import { AuthService } from "../../shared/services/auth/auth.service";
+import { State } from "../../store/reducers";
+import { Store } from "@ngrx/store";
+
+import * as AuthActions from '../../shared/store/actions/auth'
 
 @Component({
   selector: 'app-header',
@@ -10,17 +13,17 @@ import { AuthService } from "../../shared/services/auth/auth.service";
 
 export class HeaderComponent implements OnInit {
   @Input() isAuth: string
-  @Output() logoutFromHeader = new EventEmitter<Event>()
 
   constructor(
-    private authService: AuthService) {
+    private store: Store<State>,
+  ) {
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.authService.logout()
+    this.store.dispatch(new AuthActions.SignOut())
   }
 
 

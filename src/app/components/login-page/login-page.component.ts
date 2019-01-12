@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { AuthService } from "../../shared/services/auth/auth.service";
+import { Store } from "@ngrx/store";
+import { State } from "../../shared/store/reducers";
+
+import * as AuthActions from '../../shared/store/actions/auth'
 
 @Component({
   selector: 'app-login-page',
@@ -10,16 +13,14 @@ export class LoginPageComponent implements OnInit {
   @Input() loginFromLoginPage: EventEmitter<string>
 
   constructor(
-    private authService: AuthService
+    private store: Store<State>
   ) {}
 
   ngOnInit() {}
 
   loginFormSubmit() {
     // this.authService.login({ id: '123213', firstName: 'Niko', lastName: 'Bobokin' })
-    this.authService.login().subscribe(
-      val => val
-    )
+    this.store.dispatch(new AuthActions.SignIn())
   }
 
 }
