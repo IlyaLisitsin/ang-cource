@@ -4,10 +4,8 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { AuthService} from "../shared/services/auth/auth.service";
-
-import * as fromAuth from '../shared/store/reducers/auth'
-import * as RouterActions from '../shared/store/actions/router'
+import * as fromAuth from '../../store/reducers/auth'
+import * as RouterActions from '../../store/actions/router'
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +14,6 @@ export class AuthGuard implements CanActivate {
   isLogged$: Observable<boolean>;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private store: Store<fromAuth.AuthState>
   ) {

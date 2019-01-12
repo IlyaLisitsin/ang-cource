@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 import { MainContentComponent } from "./components/main-content/main-content.component";
-import { AuthGuard } from "../../auth/auth.guard";
+import { AuthGuard } from "../../shared/services/auth/auth.guard";
 import { EditCourceComponent } from "./components/edit-cource/edit-cource.component";
 import { AddCourceComponent } from "./components/add-cource/add-cource.component";
 import { NgModule } from "@angular/core";
