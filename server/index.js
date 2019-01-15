@@ -17,12 +17,25 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const courcesJsonService = new FileService(courcesUrl)
 
-app.get('/api/cources', (req, res) => courcesJsonService.getAll(req, res))
+app.get('/api/cources', (req, res) => courcesJsonService.getAll(req, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` })
+  res.send(data)
+}))
 
-app.get('/api/cources/:id', ({ params: {id} }, res) => courcesJsonService.getParticular(id, res))
+app.get('/api/cources/:id', ({ params: {id} }, res) => courcesJsonService.getParticular(id, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` })
+  res.json(data)
+}))
 
-app.put('/api/cources', (req, res) => courcesJsonService.addNew(res, req.body))
+app.put('/api/cources', (req, res) => courcesJsonService.addNew(req.body, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` })
+  res.json(data)
+}))
 
-app.delete('/api/cources/:id',({ params: {id} }, res) => courcesJsonService.removeCurrent(res, id))
+app.delete('/api/cources/:id',({ params: {id} }, res) => courcesJsonService.removeCurrent(id, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` })
+  res.json(data)
+}))
 
 app.listen(8080)
+

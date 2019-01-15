@@ -1,32 +1,35 @@
 const fs = require('fs')
+const logger = require('./logger')
 
 class FileService {
   constructor(path) {
     this.path = path
   }
 
-  getAll(req, res) {
+  getAll(req, responseCb) {
     fs.readFile(this.path, (error, data) => {
-      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
-      res.send(data)
+      if (error) responseCb(null, error)
+      responseCb(data)
     })
   }
 
-  getParticular(id, res) {
+  getParticular(id, responseCb) {
     fs.readFile(this.path, (error, data) => {
-      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
-        const { courcesList } = JSON.parse(data)
+      if (error) responseCb(null, error)
+      const { courcesList } = JSON.parse(data)
 
-        const particularCource = courcesList.find(cource => cource.id === id)
+      const particularCource = courcesList.find(cource => cource.id === id)
 
-        res.send(particularCource)
+      logger.info(id);
+
+      responseCb(particularCource)
     })
 
   }
 
-  addNew(res, newCource) {
+  addNew(newCource, responseCb) {
     fs.readFile(this.path, (error, data) => {
-      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
+      if (error) responseCb(null, error)
 
       let { courcesList } = JSON.parse(data)
 
@@ -41,15 +44,15 @@ class FileService {
       }
 
       fs.writeFile(this.path, JSON.stringify(updatedCourceList), (error) => {
-        if (error) res.send({ error: `Server erroror have been occured: ${error}` })
-        res.json(updatedCourceList)
+        if (error) responseCb(null, error)
+        responseCb(updatedCourceList)
       })
     })
   }
 
-  removeCurrent(res, idToRemove) {
+  removeCurrent(idToRemove, responseCb) {
     fs.readFile(this.path, (error, data) => {
-      if (error) res.send({ error: `Server erroror have been occured: ${error}` })
+      if (error) responseCb(null, error)
 
       const { courcesList } = JSON.parse(data)
 
@@ -58,8 +61,8 @@ class FileService {
       }
 
       fs.writeFile(this.path, JSON.stringify(updatedCourceList), (error) => {
-        if (error) res.send({ error: `Server erroror have been occured: ${error}` })
-        res.json(updatedCourceList)
+        if (error) responseCb(null, error)
+        responseCb(updatedCourceList)
       });
     })
   }
