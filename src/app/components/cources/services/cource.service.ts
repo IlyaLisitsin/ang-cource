@@ -5,6 +5,10 @@ import { BehaviorSubject, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { NgxSmartModalService } from "ngx-smart-modal";
+import { Store } from "@ngrx/store";
+import { State } from "../../../shared/store/reducers";
+
+import * as UIActions from '../../../shared/store/actions/ui'
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +19,7 @@ export class CourceService {
 
   constructor(
     private httpClient: HttpClient,
+    private store: Store<State>,
     public ngxSmartModalService: NgxSmartModalService,
   ) {
     this.fethCourceList()
@@ -27,8 +32,7 @@ export class CourceService {
   fethCourceList() {
     this.httpClient.get('http://localhost:8080/api/cources').pipe(
       catchError(error => {
-        this.ngxSmartModalService.setModalData({ data: error.message }, 'errorModal');
-        this.ngxSmartModalService.getModal('errorModal').open()
+        this.store.dispatch(new UIActions.ShowModal({ heading: 'Ha! Errrrorus!', content: error.message }))
         return of(error.message)
       })
     ).subscribe(

@@ -1,7 +1,0 @@
-<ngx-smart-modal #errorModal identifier="errorModal" (onOpen)="test()">
-  <h1>An error over there</h1>
-  <div *ngIf="errorModal.hasData()">
-    <div>{{ errorModal.getData().data }}</div>
-  </div>
-  <button (click)="closeModal()">Hm, okay</button>
-</ngx-smart-modal>

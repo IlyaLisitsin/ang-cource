@@ -1,3 +1,9 @@
-<p>
-  modal works!
-</p>
+<ngx-smart-modal #modal identifier="modal" [closable]="false">
+  <div *ngIf="modalData">
+    <h1>{{ modalData.heading }}</h1>
+    <p>{{ modalData.content }}</p>
+  </div>
+
+  <button (click)="close()">Close</button>
+
+</ngx-smart-modal>
