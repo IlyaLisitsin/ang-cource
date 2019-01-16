@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { User } from '../../models'
-import { State } from "../../store/reducers";
+import { User } from '../../../models'
+import { State } from "../../../store/reducers";
 import { Store } from "@ngrx/store";
 
-import * as AuthActions from '../../shared/store/actions/auth'
+import * as AuthActions from '../../store/actions/auth'
 
 @Component({
   selector: 'app-header',

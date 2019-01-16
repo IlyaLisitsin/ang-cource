@@ -9,13 +9,9 @@ import { RouterModule } from "@angular/router";
 import { MainContentModule } from "./components/cources/main-content.module";
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
 import { AppStoreModule } from "./app-store.module";
 import { SharedModule } from "./shared/shared.module";
 
@@ -33,12 +29,8 @@ import { SharedModule } from "./shared/shared.module";
   ],
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BreadcrumbsComponent,
     LoginPageComponent,
     PageNotFoundComponent,
-    ErrorModalComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
