@@ -2,8 +2,10 @@
   <div *ngIf="modalData">
     <h1>{{ modalData.heading }}</h1>
     <p>{{ modalData.content }}</p>
+    <div class="modal-passed-buttons" *ngFor="let button of modalData.buttons">
+      <button (click)="button.callback()">{{ button.buttonText }}</button>
+    </div>
+    <button (click)="close()">Close</button>
   </div>
-
-  <button (click)="close()">Close</button>
 
 </ngx-smart-modal>

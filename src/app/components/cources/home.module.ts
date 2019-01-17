@@ -7,18 +7,17 @@ import { CourceCollectionComponent } from "./components/cource-collection/cource
 import { FormsModule } from '@angular/forms';
 import { TransformDurationPipe } from "../../pipes/transform-duration.pipe";
 import { OrderByPipe} from "./pipes/order-by-pipe/order-by.pipe";
-import { DeleteCourceModalComponent } from "../modals/delete-cource-modal/delete-cource-modal.component";
 import { RouterModule} from "@angular/router";
 import { CourceBorderDirective } from "./directives/cource-border.directive";
 import { NgxSmartModalModule } from 'ngx-smart-modal';
-import { MainContentRoutingModule } from "./main-content-routing.module";
+import { HomeRoutingModule } from "./home-routing.module";
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    MainContentRoutingModule,
+    HomeRoutingModule,
     RouterModule,
     NgxSmartModalModule.forRoot()
   ],
@@ -27,10 +26,9 @@ import { MainContentRoutingModule } from "./main-content-routing.module";
     AddCourceComponent,
     MainContentComponent,
     CourceCollectionComponent,
-    DeleteCourceModalComponent,
     TransformDurationPipe,
     OrderByPipe,
     CourceBorderDirective,
   ]
 })
-export class MainContentModule { }
+export class HomeModule { }

@@ -2,7 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { Cource } from '../../models';
 import { CourceService } from "../../services/cource.service";
+import {Store} from "@ngrx/store";
+import {State} from "../../../../store/reducers";
 
+import * as UIActions from '../../../../shared/store/actions/ui'
 
 @Component({
   selector: 'app-cource-collection',
@@ -15,15 +18,22 @@ export class CourceCollectionComponent implements OnInit {
   activeModalCourceId: string;
 
   constructor(
-    public ngxSmartModalService: NgxSmartModalService,
+    private ngxSmartModalService: NgxSmartModalService,
     private courceService: CourceService,
+    private store: Store<State>,
   ) {}
 
   ngOnInit() {}
 
   openModal(index) {
-    this.activeModalCourceId = this.courcesCollection[index].id
-    this.ngxSmartModalService.getModal('deleteCourceModal').open()
+    this.store.dispatch(new UIActions.ShowModal({
+      heading: 'Are you sure?',
+      content: 'This action is not revertable',
+      buttons: [
+        { buttonText: 'Remove', callback:() => this.courceService.removeCource(index) }
+      ]
+    }));
+
   }
 
   removeCurrentCource() {

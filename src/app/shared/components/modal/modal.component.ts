@@ -11,12 +11,12 @@ import * as UIActions from '../../store/actions/ui';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit, AfterViewInit {
   modalData: ModalData;
 
-  @ViewChild('modal') modal: any;
+  @ViewChild('modal') modal: NgxSmartModalComponent;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,

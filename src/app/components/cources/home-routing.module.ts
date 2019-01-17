@@ -33,4 +33,4 @@ const mainContentRoutes: Routes = [
   ]
 })
 
-export class MainContentRoutingModule { }
+export class HomeRoutingModule { }
