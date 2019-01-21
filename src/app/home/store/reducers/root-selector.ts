@@ -2,4 +2,4 @@ import { createFeatureSelector } from '@ngrx/store';
 
 import { State } from '.';
 
-export const selectRootState = createFeatureSelector<State>('cources');
+export const selectRootState = createFeatureSelector<State>('home');

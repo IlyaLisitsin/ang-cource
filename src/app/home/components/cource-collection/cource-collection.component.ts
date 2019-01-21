@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgxSmartModalService } from "ngx-smart-modal";
+
 import { Cource } from '../../models';
 import { CourceService } from "../../services/cource.service";
 import { Store } from "@ngrx/store";
 import { State } from "../../../store/reducers";
 
-import * as UIActions from '../../../shared/store/actions/ui'
+import * as UIActions from '../../../shared/store/actions/ui';
+import { getCourcesList } from "../../store/reducers/cources";
 
 @Component({
   selector: 'app-cource-collection',
@@ -13,9 +15,8 @@ import * as UIActions from '../../../shared/store/actions/ui'
   styleUrls: ['./cource-collection.component.scss']
 })
 export class CourceCollectionComponent implements OnInit {
-  @Input() courcesCollection: Cource[];
+  courcesCollection: Cource[] = [];
   @Input() filterConditionFromInput: string;
-  activeModalCourceId: string;
 
   constructor(
     private ngxSmartModalService: NgxSmartModalService,
@@ -23,7 +24,9 @@ export class CourceCollectionComponent implements OnInit {
     private store: Store<State>,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.select(getCourcesList).subscribe(courcesList => this.courcesCollection = courcesList)
+  }
 
   openModal(index) {
     this.store.dispatch(new UIActions.ShowModal({
@@ -33,11 +36,6 @@ export class CourceCollectionComponent implements OnInit {
         { buttonText: 'Remove', callback:() => this.courceService.removeCource(index) }
       ]
     }));
-
-  }
-
-  removeCurrentCource() {
-    return () => this.courceService.removeCource(this.activeModalCourceId)
   }
 
 }

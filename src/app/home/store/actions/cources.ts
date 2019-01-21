@@ -12,14 +12,14 @@ export class FetchCources implements Action {
   constructor(public payload?: Array<Cource>) {}
 }
 
-export class FetchCourcesSuccess implements Action {
+export class NotifyFetchCourcesSuccess implements Action {
   readonly type = FETCH_COURCES_SUCCESS;
 
   constructor(public payload?: any) {}
 }
 
 
-export class FetchCourcesError implements Action {
+export class NotifyFetchCourcesError implements Action {
   readonly type = FETCH_COURCES_ERROR;
 
   constructor(public payload?: any) {}
@@ -27,6 +27,6 @@ export class FetchCourcesError implements Action {
 
 export type Actions =
   | FetchCources
-  | FetchCourcesSuccess
-  | FetchCourcesError
+  | NotifyFetchCourcesSuccess
+  | NotifyFetchCourcesError
 

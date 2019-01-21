@@ -14,31 +14,31 @@ import * as UIActions from '../../shared/store/actions/ui'
 })
 
 export class CourceService {
-  private cources$: BehaviorSubject<object> = new BehaviorSubject(Cource)
+  private cources$: BehaviorSubject<object> = new BehaviorSubject(Cource);
 
   constructor(
     private httpClient: HttpClient,
     private store: Store<State>,
   ) {
-    this.fethCourceList()
+    // this.fethCourceList()
   }
 
   get getCourcesList() {
     return this.cources$
   }
 
-  fethCourceList() {
-    this.httpClient.get('http://localhost:8080/api/cources').pipe(
-      catchError(error => {
-        this.store.dispatch(new UIActions.ShowModal({ heading: 'Ha! Errrrorus!', content: error.message }))
-        return of(error.message)
-      })
-    ).subscribe(
-      res => {
-        this.cources$.next(res['courcesList'])
-      }
-    )
-  }
+  // fethCourceList() {
+  //   this.httpClient.get('http://localhost:8080/api/cources').pipe(
+  //     catchError(error => {
+  //       this.store.dispatch(new UIActions.ShowModal({ heading: 'Ha! Errrrorus!', content: error.message }));
+  //       return of(error.message)
+  //     })
+  //   ).subscribe(
+  //     res => {
+  //       this.cources$.next(res['courcesList'])
+  //     }
+  //   )
+  // }
 
   getParticularCource(id) {
     return this.httpClient.get(`http://localhost:8080/api/cources/${id}`)

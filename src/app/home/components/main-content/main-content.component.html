@@ -1,0 +1,19 @@
+<div>
+    <div class="user-panel">
+      <button (click)="startDownload()">Download cources list</button>
+      <div class="search-box">
+        <input #filterInput placeholder="Name fragment or data">
+        <button (click)="buttonClick(filterInput.value)">Search</button>
+      </div>
+      <button routerLink="/cources/add">Add cource</button>
+    </div>
+    <!--<div *ngIf="courcesCollection && courcesCollection.length">-->
+      <!--<app-cource-collection-->
+        <!--[courcesCollection]="courcesCollection"-->
+        <!--[filterConditionFromInput]="filterConditionFromInput"-->
+      <!--&gt;</app-cource-collection>-->
+    <!--</div>-->
+  <app-cource-collection
+    [filterConditionFromInput]="filterConditionFromInput"
+  ></app-cource-collection>
+</div>

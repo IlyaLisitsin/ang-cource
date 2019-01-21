@@ -1,0 +1,20 @@
+<div>
+  <div *ngIf="courcesCollection.length">
+    <div
+      class="cource"
+      *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'topRated'"
+      appCourceBorder [creationDate]="cource.creation"
+    >
+      <h2>{{cource.title | uppercase}}</h2>
+      <span *ngIf="cource.topRated">TOP RATED!</span>
+      <div class="cource-info">
+        <span class="cource-duration">{{cource.duration | transformDuration}}</span>
+        <span class="cource-creation">{{cource.creation | date: 'yyyy-MM-dd'}}</span>
+      </div>
+      <div>{{cource.description}}</div>
+      <button (click)="openModal(cource.id)">remove</button>
+      <button [routerLink]="['/cources/', cource.id]">Edit cource</button>
+    </div>
+  </div>
+  <div *ngIf="!courcesCollection.length">No cources found!</div>
+</div>
