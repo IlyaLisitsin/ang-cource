@@ -5,7 +5,7 @@ import { EditCourceComponent } from "./components/edit-cource/edit-cource.compon
 import { MainContentComponent } from "./components/main-content/main-content.component";
 import { CourceCollectionComponent } from "./components/cource-collection/cource-collection.component";
 import { FormsModule } from '@angular/forms';
-import { TransformDurationPipe } from "../../pipes/transform-duration.pipe";
+import { TransformDurationPipe } from "../pipes/transform-duration.pipe";
 import { OrderByPipe} from "./pipes/order-by-pipe/order-by.pipe";
 import { RouterModule} from "@angular/router";
 import { CourceBorderDirective } from "./directives/cource-border.directive";

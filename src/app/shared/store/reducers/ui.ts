@@ -1,7 +1,7 @@
 import { ModalData } from "../../models";
 
 import * as UIActions from '../actions/ui'
-import {createSelector} from "@ngrx/store";
+import { createSelector } from "@ngrx/store";
 import { selectRootState } from "./root-selector";
 
 export interface UIState {
@@ -21,14 +21,14 @@ const initialState: UIState = {
     show: false,
     data: null,
   }
-}
+};
 
 export function reducer(state = initialState, { payload, type }: UIActions.Actions) {
   switch (type) {
     case UIActions.SHOW_MODAL:
-      return { ...state, modal: { show: true, data: payload } }
+      return { ...state, modal: { show: true, data: payload } };
     case UIActions.HIDE_MODAL:
-      return { ...state, modal: { show: false, data: null } }
+      return { ...state, modal: { show: false, data: null } };
     default:
       return state
   }

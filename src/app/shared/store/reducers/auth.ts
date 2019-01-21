@@ -1,6 +1,6 @@
-import * as AuthActions from '../actions/auth'
-import {createSelector} from "@ngrx/store";
+import { createSelector } from "@ngrx/store";
 
+import * as AuthActions from '../actions/auth'
 import { selectRootState } from "./root-selector";
 
 export interface AuthState {

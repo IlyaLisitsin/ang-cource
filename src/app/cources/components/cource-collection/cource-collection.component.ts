@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { Cource } from '../../models';
 import { CourceService } from "../../services/cource.service";
-import {Store} from "@ngrx/store";
-import {State} from "../../../../store/reducers";
+import { Store } from "@ngrx/store";
+import { State } from "../../../store/reducers";
 
-import * as UIActions from '../../../../shared/store/actions/ui'
+import * as UIActions from '../../../shared/store/actions/ui'
 
 @Component({
   selector: 'app-cource-collection',

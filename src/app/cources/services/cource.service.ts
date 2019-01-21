@@ -5,9 +5,9 @@ import { BehaviorSubject, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { Store } from "@ngrx/store";
-import { State } from "../../../shared/store/reducers";
+import { State } from "../../shared/store/reducers";
 
-import * as UIActions from '../../../shared/store/actions/ui'
+import * as UIActions from '../../shared/store/actions/ui'
 
 @Injectable({
   providedIn: 'root'

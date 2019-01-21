@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { State } from "../../shared/store/reducers";
+import { State } from "../../../shared/store/reducers";
 
-import * as AuthActions from '../../shared/store/actions/auth'
+import * as AuthActions from '../../../shared/store/actions/auth'
 
 @Component({
   selector: 'app-login-page',

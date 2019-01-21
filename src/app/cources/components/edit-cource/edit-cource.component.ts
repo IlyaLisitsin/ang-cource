@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import {Cource} from "../../models";
 import { CourceService } from "../../services/cource.service";
 
 @Component({
@@ -12,8 +11,8 @@ import { CourceService } from "../../services/cource.service";
 })
 
 export class EditCourceComponent implements OnInit {
-  cource$: Observable<object>
-  cource: any
+  cource$: Observable<object>;
+  cource: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +32,7 @@ export class EditCourceComponent implements OnInit {
           return this.courceSrv.getParticularCource(params.get('id'))
         },
       ),
-    )
+    );
 
     this.cource$.subscribe(
       cource => this.cource = cource
@@ -49,7 +48,7 @@ export class EditCourceComponent implements OnInit {
       topRated: this.cource.topRated,
       duration: this.cource.duration,
       description: this.cource.description,
-    })
+    });
 
     this.router.navigate(['../'])
   }

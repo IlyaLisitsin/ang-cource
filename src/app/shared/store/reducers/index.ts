@@ -1,4 +1,4 @@
-import { ActionReducer, ActionReducerMap, combineReducers } from '@ngrx/store'
+import { ActionReducer, ActionReducerMap, combineReducers } from '@ngrx/store';
 
 // List of module reducers
 import * as fromAuth from './auth';
