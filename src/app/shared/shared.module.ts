@@ -9,6 +9,7 @@ import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { BreadcrumbsComponent } from "./components/breadcrumbs/breadcrumbs.component";
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { BreadcrumbsComponent } from "./components/breadcrumbs/breadcrumbs.compo
     PageContainerComponent,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    SpinnerComponent
   ],
   exports: [
     PageContainerComponent,
