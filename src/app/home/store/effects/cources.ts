@@ -23,10 +23,10 @@ export class CourcesEffects {
     ofType(CourcesActions.FETCH_COURCES),
     tap(() => this.store.dispatch(new UIActions.ShowSpinner())),
     mergeMap((action: CourcesActions.FetchCources) => {
-      // const params = action.payload;
+      const page = action.payload ? action.payload : 1;
 
-      return this.httpClient.get('http://localhost:8080/api/cources').pipe(
-        map(response => new CourcesActions.NotifyFetchCourcesSuccess(response['courcesList'])),
+      return this.httpClient.get(`http://localhost:8080/api/cources?page=${page}&size=3`).pipe(
+        map(response => new CourcesActions.NotifyFetchCourcesSuccess(response)),
         catchError(error => of(new CourcesActions.NotifyFetchCourcesError(error))),
         finalize(() => this.store.dispatch(new UIActions.HideSpinner()))
       );

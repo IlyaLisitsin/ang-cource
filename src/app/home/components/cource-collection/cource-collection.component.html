@@ -15,6 +15,7 @@
       <button (click)="openModal(cource.id)">remove</button>
       <button [routerLink]="['/cources/', cource.id]">Edit cource</button>
     </div>
+    <app-cource-pagination [size]="4"></app-cource-pagination>
   </div>
   <div *ngIf="!courcesCollection.length">No cources found!</div>
 </div>

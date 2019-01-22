@@ -6,10 +6,26 @@ class FileService {
     this.path = path
   }
 
-  getAll(req, responseCb) {
+  generatePageInfo(actualCourceList, page, size) {
+    return {
+      totalCources: actualCourceList.length,
+      totalPages: Math.round(actualCourceList.length / size),
+      currentPage: Number(page),
+    }
+  }
+
+  getCources(req, responseCb) {
+    const { page, size } = req.query;
+
     fs.readFile(this.path, (error, data) => {
       if (error) responseCb(null, error);
-      responseCb(data)
+      if (page && size) {
+        const { courcesList } = JSON.parse(data);
+
+        const courcesRange = courcesList.slice(Number(page - 1) * Number(size), Number(page - 1) * Number(size) + Number(size));
+
+        responseCb({ courcesList: courcesRange, pageInfo: this.generatePageInfo(courcesList, page, size)})
+      } else responseCb(data)
     })
   }
 

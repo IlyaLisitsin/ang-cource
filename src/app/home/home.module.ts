@@ -11,6 +11,7 @@ import { RouterModule} from "@angular/router";
 import { CourceBorderDirective } from "./directives/cource-border.directive";
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { HomeRoutingModule } from "./home-routing.module";
+import { CourcePaginationComponent } from './components/cource-pagination/cource-pagination.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { HomeRoutingModule } from "./home-routing.module";
     TransformDurationPipe,
     OrderByPipe,
     CourceBorderDirective,
+    CourcePaginationComponent,
   ]
 })
 export class HomeModule { }

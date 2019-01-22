@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Cource } from '../models'
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, of } from "rxjs";
-import { catchError } from "rxjs/operators";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { Store } from "@ngrx/store";
 import { State } from "../../shared/store/reducers";
@@ -20,25 +19,7 @@ export class CourceService {
     private httpClient: HttpClient,
     private store: Store<State>,
   ) {
-    // this.fethCourceList()
   }
-
-  get getCourcesList() {
-    return this.cources$
-  }
-
-  // fethCourceList() {
-  //   this.httpClient.get('http://localhost:8080/api/cources').pipe(
-  //     catchError(error => {
-  //       this.store.dispatch(new UIActions.ShowModal({ heading: 'Ha! Errrrorus!', content: error.message }));
-  //       return of(error.message)
-  //     })
-  //   ).subscribe(
-  //     res => {
-  //       this.cources$.next(res['courcesList'])
-  //     }
-  //   )
-  // }
 
   getParticularCource(id) {
     return this.httpClient.get(`http://localhost:8080/api/cources/${id}`)

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const courcesJsonService = new FileService(courcesUrl);
 
-app.get('/api/cources', (req, res) => courcesJsonService.getAll(req, (data, err) => {
+app.get('/api/cources', (req, res) => courcesJsonService.getCources(req, (data, err) => {
   if (err) res.next({ error: `Server erroror have been occured: ${err}` });
   res.send(data)
 }));

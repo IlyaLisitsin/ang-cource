@@ -6,7 +6,7 @@ import { RouterStateSerializer, StoreRouterConnectingModule } from "@ngrx/router
 import { CustomRouterStateSerializer } from "./shared/store/utils/router-utils";
 
 // Store reducers
-import { reducers, metaReducers } from './store/reducers';
+import { reducers } from './store/reducers';
 
 // Store effects
 import { AppEffects } from './store/effects';
@@ -15,8 +15,9 @@ const initialState = {};
 
 @NgModule({
   imports: [
-    StoreModule.forRoot(reducers, { initialState, metaReducers }),
-    StoreRouterConnectingModule.forRoot(),
+    // StoreModule.forRoot(reducers, { initialState, metaReducers }),
+    StoreModule.forRoot(reducers, { initialState }),
+    StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot(AppEffects),
   ],

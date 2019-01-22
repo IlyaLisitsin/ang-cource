@@ -1,1 +1,2 @@
-export * from './cource.model'
+export * from './cource.model';
+export * from './page-info.model';

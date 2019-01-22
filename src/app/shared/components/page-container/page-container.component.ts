@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
+import { ChangeDetectorRef, Component, OnInit, AfterViewChecked } from '@angular/core';
+import {Observable, of} from "rxjs";
 import { Store } from "@ngrx/store";
 
 import { getSpinnerShowFlag, State} from "../../store/reducers/ui";
@@ -9,15 +9,19 @@ import { getSpinnerShowFlag, State} from "../../store/reducers/ui";
   templateUrl: './page-container.component.html',
   styleUrls: ['./page-container.component.scss']
 })
-export class PageContainerComponent implements OnInit {
-  isSpinnerVisible$: Observable<boolean>;
+export class PageContainerComponent implements OnInit, AfterViewChecked {
+  isSpinnerVisible$: Observable<boolean> = of(false);
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.isSpinnerVisible$ = this.store.select(getSpinnerShowFlag)
   }
 
+  ngAfterViewChecked() {
+    this.isSpinnerVisible$ = this.store.select(getSpinnerShowFlag);
+    this.cd.detectChanges();
+  }
 }
