@@ -1,10 +1,10 @@
 <div>
   <div>
     <button
-      *ngFor="let page of totalPages; index as index"
-      (click)="pageClick(index)"
-      [ngClass]="index === currentPage && 'active'"
-    >{{ index }}
+      *ngFor="let page of pagesToShow"
+      (click)="pageClick(page)"
+      [ngClass]="page === currentPage && 'active'"
+    >{{ page }}
     </button>
   </div>
 </div>

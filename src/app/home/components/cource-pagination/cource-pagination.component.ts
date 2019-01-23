@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
 
 import * as CourcesActions from '../../store/actions/cources'
@@ -13,29 +13,45 @@ import { PageInfo } from "../../models";
 })
 
 export class CourcePaginationComponent implements OnInit {
-  totalPages: Array<any>;
+  totalPages: number;
   currentPage: number;
 
-  // pagesToShow: Array<any>;
+  pagesToShow: Array<number> = [];
 
-  @Input() size: number = 3;
+  @Input() size: number;
 
   constructor(
     private store: Store<State>,
   ) { }
 
   pageClick(index: number) {
-
     this.store.dispatch(new CourcesActions.FetchCources(index))
   }
 
   ngOnInit() {
     this.store.select(getPaginationData).subscribe((paginationData: PageInfo) => {
       const { totalPages, currentPage } = paginationData;
-
-      this.totalPages = new Array(totalPages + 1);
+      this.totalPages = totalPages;
       this.currentPage = currentPage;
+      this.pagesToShowFormer()
     })
+  }
+
+  private pagesToShowFormer(): void {
+    this.pagesToShow = [];
+
+    const offset = Math.floor(this.size / 2);
+    let start = this.currentPage - offset <= 0 ? 1 : this.currentPage - offset;
+    let end = start + this.size;
+    if (end > this.totalPages) end = this.totalPages + 1;
+
+    if (this.currentPage === this.totalPages) start--;
+
+    while (start < end) {
+      this.pagesToShow.push(start);
+      start++
+    }
+
   }
 
 }

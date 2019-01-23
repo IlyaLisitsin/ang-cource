@@ -25,7 +25,7 @@ export class CourcesEffects {
     mergeMap((action: CourcesActions.FetchCources) => {
       const page = action.payload ? action.payload : 1;
 
-      return this.httpClient.get(`http://localhost:8080/api/cources?page=${page}&size=3`).pipe(
+      return this.httpClient.get(`http://localhost:8080/api/cources?page=${page}&size=4`).pipe(
         map(response => new CourcesActions.NotifyFetchCourcesSuccess(response)),
         catchError(error => of(new CourcesActions.NotifyFetchCourcesError(error))),
         finalize(() => this.store.dispatch(new UIActions.HideSpinner()))
