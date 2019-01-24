@@ -32,7 +32,7 @@ app.put('/api/cources', (req, res) => courcesJsonService.addNew(req.body, (data,
   res.json(data)
 }));
 
-app.delete('/api/cources/:id',({ params: {id} }, res) => courcesJsonService.removeCurrent(id, (data, err) => {
+app.delete('/api/cources/:id',(req, res) => courcesJsonService.removeCurrent(req, (data, err) => {
   if (err) res.next({ error: `Server erroror have been occured: ${err}` });
   res.json(data)
 }));

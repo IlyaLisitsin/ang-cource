@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { filter } from "rxjs/operators";
+import {filter, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -17,7 +17,9 @@ export class BreadcrumbsComponent implements OnInit {
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-    ).subscribe(
+      // take(1),
+    )
+      .subscribe(
       event => this.getCrumbs(event)
     )
   }

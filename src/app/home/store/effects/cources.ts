@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from "@ngrx/store";
-import { catchError, mergeMap, map, tap, finalize } from "rxjs/operators";
+import {catchError, mergeMap, map, tap, finalize, take} from "rxjs/operators";
 import { of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 import { State } from "../reducers";
 import * as CourcesActions from '../actions/cources';
 import * as UIActions from "../../../shared/store/actions/ui";
+import {getPaginationData} from "../reducers/cources";
 
 @Injectable()
 export class CourcesEffects {
@@ -48,6 +49,25 @@ export class CourcesEffects {
   @Effect({ dispatch: false })
   notifyFetchCourcesSuccess$ = this.actions$.pipe(
     ofType(CourcesActions.FETCH_COURCES_SUCCESS),
-    map(cources => cources)
-  )
+    map(courcesListWithPageInfo => courcesListWithPageInfo)
+  );
+
+  @Effect()
+  removeCource$ = this.actions$.pipe(
+    ofType(CourcesActions.REMOVE_COURCE),
+    tap(() => this.store.dispatch(new UIActions.ShowSpinner())),
+    mergeMap((action: CourcesActions.FetchCources) => {
+      const id = action.payload;
+
+      return this.store.select(getPaginationData).pipe(
+        take(1),
+        mergeMap(({ currentPage }) =>
+          this.httpClient.delete(`http://localhost:8080/api/cources/${id}?page=${currentPage}&size=4`).pipe(
+          map((response) =>new CourcesActions.FetchCources(response['pageInfo'].currentPage)),
+          finalize(() => this.store.dispatch(new UIActions.HideSpinner())),
+          tap(() => this.store.dispatch(new UIActions.HideModal())),
+        ))
+      )
+    })
+  );
 }

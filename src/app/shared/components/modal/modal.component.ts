@@ -35,7 +35,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   close() {
     this.store.dispatch(new UIActions.HideModal());
-    this.modal.close();
   }
 
   ngAfterViewInit(): void {

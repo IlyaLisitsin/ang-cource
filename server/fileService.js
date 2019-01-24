@@ -66,19 +66,27 @@ class FileService {
     })
   }
 
-  removeCurrent(idToRemove, responseCb) {
+  removeCurrent(req, responseCb) {
+    const { page, size } = req.query;
+    const idToRemove = req.params.id;
+
     fs.readFile(this.path, (error, data) => {
       if (error) responseCb(null, error);
 
-      const { courcesList } = JSON.parse(data);
+      let { courcesList } = JSON.parse(data);
 
-      const updatedCourceList = {
-        courcesList: courcesList.filter(cource => cource.id !== idToRemove)
+      courcesList = courcesList.filter(cource => cource.id !== idToRemove)
+      const updatedCourceListForFile = {
+        courcesList
       };
 
-      fs.writeFile(this.path, JSON.stringify(updatedCourceList), (error) => {
+      fs.writeFile(this.path, JSON.stringify(updatedCourceListForFile), (error) => {
         if (error) responseCb(null, error);
-        responseCb(updatedCourceList)
+
+        const courcesRange = courcesList.slice(Number(page - 1) * Number(size), Number(page - 1) * Number(size) + Number(size));
+
+        console.log(this.generatePageInfo(courcesList, page, size))
+        responseCb({ courcesList: courcesRange, pageInfo: this.generatePageInfo(courcesList, page, size) })
       });
     })
   }
