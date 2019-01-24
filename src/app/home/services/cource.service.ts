@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Cource } from '../models'
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, of } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { fromPromise } from "rxjs/internal-compatibility";
-import { Store } from "@ngrx/store";
-import { State } from "../../shared/store/reducers";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,6 @@ export class CourceService {
 
   constructor(
     private httpClient: HttpClient,
-    private store: Store<State>,
   ) {
   }
 

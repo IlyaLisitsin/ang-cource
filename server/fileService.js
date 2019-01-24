@@ -85,7 +85,6 @@ class FileService {
 
         const courcesRange = courcesList.slice(Number(page - 1) * Number(size), Number(page - 1) * Number(size) + Number(size));
 
-        console.log(this.generatePageInfo(courcesList, page, size))
         responseCb({ courcesList: courcesRange, pageInfo: this.generatePageInfo(courcesList, page, size) })
       });
     })
