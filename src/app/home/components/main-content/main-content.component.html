@@ -2,8 +2,7 @@
     <div class="user-panel">
       <button (click)="startDownload()">Download cources list</button>
       <div class="search-box">
-        <input #filterInput placeholder="Name fragment or data">
-        <button (click)="buttonClick(filterInput.value)">Search</button>
+        <app-search-box></app-search-box>
       </div>
       <button routerLink="/cources/add">Add cource</button>
     </div>

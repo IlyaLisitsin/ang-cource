@@ -1,0 +1,13 @@
+<div>
+  <input
+    [ngModel]='model'
+    (ngModelChange)='searchChangeHandler($event)'
+    type="search"
+    placeholder="Begin to type the title of the cource and let's think what we can do about it"
+  >
+  <ul class="result-container">
+    <li *ngFor="let courceResult of resultCourcesList">
+      <a [routerLink]="['/cources/', courceResult.id]">{{ courceResult.title }}</a>
+    </li>
+  </ul>
+</div>

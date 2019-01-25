@@ -22,6 +22,11 @@ app.get('/api/cources', (req, res) => courcesJsonService.getCources(req, (data, 
   res.send(data)
 }));
 
+app.get('/api/cources/search', (req, res) => courcesJsonService.searchCources(req, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` });
+  res.json(data)
+}));
+
 app.get('/api/cources/:id', ({ params: {id} }, res) => courcesJsonService.getParticular(id, (data, err) => {
   if (err) res.next({ error: `Server erroror have been occured: ${err}` });
   res.json(data)

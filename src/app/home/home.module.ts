@@ -12,6 +12,7 @@ import { CourceBorderDirective } from "./directives/cource-border.directive";
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { HomeRoutingModule } from "./home-routing.module";
 import { CourcePaginationComponent } from './components/cource-pagination/cource-pagination.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { CourcePaginationComponent } from './components/cource-pagination/cource
     OrderByPipe,
     CourceBorderDirective,
     CourcePaginationComponent,
+    SearchBoxComponent,
   ]
 })
 export class HomeModule { }

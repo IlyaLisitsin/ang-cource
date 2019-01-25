@@ -29,6 +29,19 @@ class FileService {
     })
   }
 
+  searchCources(req, responseCb) {
+    const { query } = req.query;
+
+    fs.readFile(this.path, (error, data) => {
+      if (error) responseCb(null, error);
+      const { courcesList } = JSON.parse(data);
+
+      const courcesFittingSearchQuery = courcesList.filter(cource => cource.title.search(query) !== -1);
+
+      responseCb({ courcesSearchResults: courcesFittingSearchQuery })
+    })
+  }
+
   getParticular(id, responseCb) {
     fs.readFile(this.path, (error, data) => {
       if (error) responseCb(null, error);
