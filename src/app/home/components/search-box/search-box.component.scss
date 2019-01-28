@@ -1,10 +1,29 @@
 :host {
 
+  .search-box-container {
+    position: relative;
+  }
+
   input {
     width: 470px;
   }
 
   .result-container {
     background: #fff;
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    z-index: 100;
+    box-shadow: -12px -12px 31px -20px rgba(0, 0, 0, 0.75);
+    list-style: none;
   }
+
+  .search-box-spinner {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+  }
+
+
 }

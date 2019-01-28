@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from "@angular/common/http";
-import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
 import { Subject } from "rxjs";
+import {Cource} from "../../models";
 
 
 @Component({
@@ -11,7 +12,8 @@ import { Subject } from "rxjs";
   styleUrls: ['./search-box.component.scss']
 })
 export class SearchBoxComponent implements OnInit {
-  resultCourcesList = []
+  resultCourcesList: Array<Cource> = [];
+  loading: boolean = false;
 
   modelChanged: Subject<string> = new Subject<string>();
 
@@ -22,6 +24,7 @@ export class SearchBoxComponent implements OnInit {
   ngOnInit() {
     this.modelChanged.pipe(
       debounceTime(300),
+      tap(() => this.loading = true),
       distinctUntilChanged(),
     ).subscribe((inputText: string) => {
 
@@ -29,6 +32,7 @@ export class SearchBoxComponent implements OnInit {
       ).subscribe(
         // @ts-ignore
         ({ courcesSearchResults }) => {
+          this.loading = false;
           this.resultCourcesList = courcesSearchResults;
         }
       )
@@ -36,7 +40,11 @@ export class SearchBoxComponent implements OnInit {
   }
 
   searchChangeHandler(value: string): void {
-    if (!value) this.resultCourcesList = [];
+    if (!value) {
+      this.resultCourcesList = [];
+      return;
+    }
+
     this.modelChanged.next(value)
   }
 
