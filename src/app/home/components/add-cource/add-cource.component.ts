@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CourceService} from "../../services/cource.service";
+import { Store } from "@ngrx/store";
+import { Router } from "@angular/router";
+
+import * as CourceActions from "../../store/actions/cources";
+import { State } from "../../store/reducers/cources";
 
 @Component({
   selector: 'app-add-cource',
@@ -13,7 +17,8 @@ export class AddCourceComponent implements OnInit {
   date: string = '';
 
   constructor(
-    private courceService: CourceService,
+    private store: Store<State>,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -21,14 +26,15 @@ export class AddCourceComponent implements OnInit {
 
   addNewCource() {
     const cource = {
-      'id': String(Math.random()),
-      'title': this.title,
-      'creation': new Date(this.date),
-      'duration': String(this.duration),
-      'description': this.description,
-      'topRated': true
+      id: String(Math.random()),
+      title: this.title,
+      creation: new Date(this.date),
+      duration: String(this.duration),
+      description: this.description,
+      topRated: true
     };
 
-    this.courceService.addCource(cource)
+    this.store.dispatch(new CourceActions.AddCource(cource));
+    this.router.navigate(['../'])
   }
 }

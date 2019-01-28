@@ -70,4 +70,16 @@ export class CourcesEffects {
       )
     })
   );
+
+  @Effect({ dispatch: false })
+  addCource$ = this.actions$.pipe(
+    ofType(CourcesActions.ADD_COURCE),
+    mergeMap((action: CourcesActions.AddCource) => {
+      const newCource = action.payload;
+
+      return this.httpClient.put('http://localhost:8080/api/cources', newCource).pipe(
+        finalize(() => this.store.dispatch(new UIActions.HideSpinner())),
+      )
+    }
+  ))
 }

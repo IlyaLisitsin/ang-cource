@@ -1,10 +1,13 @@
 import { Action } from "@ngrx/store";
+import {Cource} from "../../models";
 
 export const FETCH_COURCES = '[Cources] Fetch cources';
 export const FETCH_COURCES_SUCCESS = '[Cources] Fetch cources success';
 export const FETCH_COURCES_ERROR = '[Cources] Fetch cources error';
 
 export const REMOVE_COURCE = '[Cources] Remove cources cource';
+
+export const ADD_COURCE = '[Cources] Remove cources cource';
 
 export class FetchCources implements Action {
   readonly type = FETCH_COURCES;
@@ -30,8 +33,16 @@ export class RemoveCource implements Action {
   constructor(public payload: number) {}
 }
 
+export class AddCource implements Action {
+  readonly type = ADD_COURCE;
+
+  constructor(public payload: Cource) {}
+}
+
+
 export type Actions =
   | FetchCources
   | NotifyFetchCourcesSuccess
   | NotifyFetchCourcesError
   | RemoveCource
+  | AddCource

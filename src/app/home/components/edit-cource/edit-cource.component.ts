@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { CourceService } from "../../services/cource.service";
+import { HttpClient } from "@angular/common/http";
+import { Store } from "@ngrx/store";
+
+import * as CourceActions from '../../store/actions/cources';
+import { State } from "../../store/reducers/cources";
 
 @Component({
   selector: 'app-edit-cource',
@@ -17,7 +21,8 @@ export class EditCourceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private courceSrv: CourceService,
+    private httpClient: HttpClient,
+    private store: Store<State>,
   ) { }
 
   ngOnInit() {
@@ -27,10 +32,7 @@ export class EditCourceComponent implements OnInit {
     // )
 
     this.cource$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        {
-          return this.courceSrv.getParticularCource(params.get('id'))
-        },
+      switchMap((params: ParamMap) => this.httpClient.get(`http://localhost:8080/api/cources/${params.get('id')}`),
       ),
     );
 
@@ -41,14 +43,14 @@ export class EditCourceComponent implements OnInit {
   }
 
   saveChanges() {
-    this.courceSrv.addCource({
+    this.store.dispatch(new CourceActions.AddCource({
       id: this.cource.id,
       title: this.cource.title,
       creation: new Date(String(this.cource.creation)),
       topRated: this.cource.topRated,
       duration: this.cource.duration,
       description: this.cource.description,
-    });
+    }));
 
     this.router.navigate(['../'])
   }
