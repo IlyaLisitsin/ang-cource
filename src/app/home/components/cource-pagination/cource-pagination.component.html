@@ -1,7 +1,7 @@
 <div>
   <div>
     <button
-      *ngFor="let page of pagesToShow"
+      *ngFor="let page of getNumberOfPages()"
       (click)="pageClick(page)"
       [ngClass]="page === currentPage && 'active'"
     >{{ page }}

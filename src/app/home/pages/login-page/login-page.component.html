@@ -1,6 +1,8 @@
 <div>
   <h3>Login</h3>
-  <input placeholder="email">
-  <input placeholder="password">
-  <button (click)="loginFormSubmit()">Submit</button>
+  <form>
+    <input placeholder="email" name="email" [(ngModel)]="loginForm.email">
+    <input placeholder="password" type="password" name="password" [(ngModel)]="loginForm.password">
+    <button (click)="loginFormSubmit()">Submit</button>
+  </form>
 </div>

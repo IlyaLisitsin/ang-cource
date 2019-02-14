@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const FileService = require('./fileService');
 
+const FileService = require('./fileService');
 const courcesUrl = __dirname + '/cources.json';
 
 const app = express();
@@ -37,10 +37,13 @@ app.put('/api/cources', (req, res) => courcesJsonService.addNew(req.body, (data,
   res.json(data)
 }));
 
-app.delete('/api/cources/:id',(req, res) => courcesJsonService.removeCurrent(req, (data, err) => {
+app.delete('/api/cources/:id', (req, res) => courcesJsonService.removeCurrent(req, (data, err) => {
   if (err) res.next({ error: `Server erroror have been occured: ${err}` });
   res.json(data)
 }));
 
-app.listen(8080);
+app.post('/api/login', (req, res) => {
+  res.json(true);
+});
 
+app.listen(8080);

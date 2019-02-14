@@ -1,5 +1,30 @@
 const fs = require('fs');
 const logger = require('./logger');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const courceSchema = new Schema({
+  title: String,
+  duration: String,
+  creation: String,
+  topRated: Boolean,
+  description: String,
+});
+
+const Cource = mongoose.model('Cource', courceSchema);
+// const TestCource = new Cource({
+//   title: 'test title',
+//   duration: '12323',
+//   creation: 'test',
+//   topRated: true,
+//   description: 'test',
+// })
+
+// TestCource.save((err, wut) => console.log(2343323242, wut))
+
+mongoose.connect('mongodb+srv://Ilya:Ilya@cluster0-9mimi.mongodb.net/cources-project',  { useNewUrlParser: true });
+const { connection } = mongoose;
+connection.on('error', console.error.bind(console, 'connection error:'));
 
 class FileService {
   constructor(path) {
@@ -8,25 +33,25 @@ class FileService {
 
   generatePageInfo(actualCourceList, page, size) {
     return {
-      totalCources: actualCourceList.length,
-      totalPages: Math.round(actualCourceList.length / size),
+      totalCources: actualCourceList,
+      totalPages: Math.round(actualCourceList / size),
       currentPage: Number(page),
     }
   }
 
   getCources(req, responseCb) {
-    const { page, size } = req.query;
+    let { page, size } = req.query;
+    page = Number(page);
+    size = Number(size)
 
-    fs.readFile(this.path, (error, data) => {
-      if (error) responseCb(null, error);
-      if (page && size) {
-        const { courcesList } = JSON.parse(data);
-
-        const courcesRange = courcesList.slice(Number(page - 1) * Number(size), Number(page - 1) * Number(size) + Number(size));
-
-        responseCb({ courcesList: courcesRange, pageInfo: this.generatePageInfo(courcesList, page, size)})
-      } else responseCb(data)
-    })
+    connection.db.collection('courceslist', (err, collection) => {
+      collection.countDocuments()
+        .then(count => {
+          collection.find({}).skip((page - 1) * size).limit(size).toArray()
+          .then((data) => responseCb({ courcesList: data, pageInfo: this.generatePageInfo(count, page, size)}))
+      })
+        .catch(err => responseCb(null, err))
+    });
   }
 
   searchCources(req, responseCb) {
