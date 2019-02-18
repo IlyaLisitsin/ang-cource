@@ -43,16 +43,14 @@ export class EditCourceComponent implements OnInit {
   }
 
   saveChanges() {
-    this.store.dispatch(new CourceActions.AddCource({
-      id: this.cource.id,
+    this.store.dispatch(new CourceActions.EditCource({
+      id: this.cource._id,
       title: this.cource.title,
       creation: new Date(String(this.cource.creation)),
       topRated: this.cource.topRated,
       duration: this.cource.duration,
       description: this.cource.description,
     }));
-
-    this.router.navigate(['../'])
   }
 
 }

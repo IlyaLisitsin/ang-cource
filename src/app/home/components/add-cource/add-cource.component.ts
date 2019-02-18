@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { Router } from "@angular/router";
 
 import * as CourceActions from "../../store/actions/cources";
 import { State } from "../../store/reducers/cources";
@@ -10,6 +9,7 @@ import { State } from "../../store/reducers/cources";
   templateUrl: './add-cource.component.html',
   styleUrls: ['./add-cource.component.css']
 })
+
 export class AddCourceComponent implements OnInit {
   duration: number = 0;
   title: string = '';
@@ -18,7 +18,6 @@ export class AddCourceComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -26,7 +25,6 @@ export class AddCourceComponent implements OnInit {
 
   addNewCource() {
     const cource = {
-      id: String(Math.random()),
       title: this.title,
       creation: new Date(this.date),
       duration: String(this.duration),
@@ -35,6 +33,5 @@ export class AddCourceComponent implements OnInit {
     };
 
     this.store.dispatch(new CourceActions.AddCource(cource));
-    this.router.navigate(['../'])
   }
 }

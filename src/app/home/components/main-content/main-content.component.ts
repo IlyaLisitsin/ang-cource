@@ -34,7 +34,6 @@ export class MainContentComponent implements OnInit {
 
     this.store.dispatch(new CourcesActions.FetchCources());
 
-
     this.courceService.downloadCourseListJSON$.subscribe(data => data.blob()
       .then(res => {
         this.url = window.URL.createObjectURL(res);
@@ -53,9 +52,5 @@ export class MainContentComponent implements OnInit {
   buttonClick(inputValue) {
     this.filterConditionFromInput = inputValue;
   }
-
-  // toggleCourceStatus() {
-  //   this.isAddCource = !this.isAddCource
-  // }
 
 }

@@ -32,7 +32,12 @@ app.get('/api/cources/:id', ({ params: {id} }, res) => courcesJsonService.getPar
   res.json(data)
 }));
 
-app.put('/api/cources', (req, res) => courcesJsonService.addNew(req.body, (data, err) => {
+app.put('/api/cources/add', (req, res) => courcesJsonService.addNew(req.body, (data, err) => {
+  if (err) res.next({ error: `Server erroror have been occured: ${err}` });
+  res.json(data)
+}));
+
+app.put('/api/cources/edit', (req, res) => courcesJsonService.editCource(req.body, (data, err) => {
   if (err) res.next({ error: `Server erroror have been occured: ${err}` });
   res.json(data)
 }));

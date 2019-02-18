@@ -8,7 +8,8 @@ import { HttpClient } from "@angular/common/http";
 import { State } from "../reducers";
 import * as CourcesActions from '../actions/cources';
 import * as UIActions from "../../../shared/store/actions/ui";
-import {getPaginationData} from "../reducers/cources";
+import * as RouterActions from '../../../shared/store/actions/router';
+import { getPaginationData } from "../reducers/cources";
 
 @Injectable()
 export class CourcesEffects {
@@ -63,7 +64,8 @@ export class CourcesEffects {
         take(1),
         mergeMap(({ currentPage }) =>
           this.httpClient.delete(`http://localhost:8080/api/cources/${id}?page=${currentPage}&size=4`).pipe(
-          map((response) =>new CourcesActions.FetchCources(response['pageInfo'].currentPage)),
+          map((response) => new CourcesActions.FetchCources(response['pageInfo'].currentPage)),
+          catchError(({message, statusText}) => of(this.store.dispatch(new UIActions.ShowModal({ heading: statusText, content: message })))),
           finalize(() => this.store.dispatch(new UIActions.HideSpinner())),
           tap(() => this.store.dispatch(new UIActions.HideModal())),
         ))
@@ -74,12 +76,31 @@ export class CourcesEffects {
   @Effect({ dispatch: false })
   addCource$ = this.actions$.pipe(
     ofType(CourcesActions.ADD_COURCE),
+    tap(() => this.store.dispatch(new UIActions.ShowSpinner())),
     mergeMap((action: CourcesActions.AddCource) => {
       const newCource = action.payload;
 
-      return this.httpClient.put('http://localhost:8080/api/cources', newCource).pipe(
-        finalize(() => this.store.dispatch(new UIActions.HideSpinner())),
+      return this.httpClient.put('http://localhost:8080/api/cources/add', newCource).pipe(
+        finalize(() => this.store.dispatch(new RouterActions.Back())),
+        map(() => this.store.dispatch(new UIActions.HideSpinner())),
+        catchError(({message, statusText}) => of(this.store.dispatch(new UIActions.ShowModal({ heading: statusText, content: message })))),
       )
     }
   ))
+
+  @Effect({ dispatch: false })
+  editCource$ = this.actions$.pipe(
+    ofType(CourcesActions.EDIT_COURCE),
+    tap(() => this.store.dispatch(new UIActions.ShowSpinner())),
+    mergeMap((action: CourcesActions.EditCource) => {
+        const newCource = action.payload;
+
+        return this.httpClient.put('http://localhost:8080/api/cources/edit', newCource).pipe(
+          finalize(() => this.store.dispatch(new RouterActions.Back())),
+          map(() => this.store.dispatch(new UIActions.HideSpinner())),
+          catchError(({message, statusText}) => of(this.store.dispatch(new UIActions.ShowModal({ heading: statusText, content: message })))),
+        )
+      }
+    ),
+  )
 }

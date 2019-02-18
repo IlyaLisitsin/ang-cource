@@ -12,8 +12,8 @@
         <span class="cource-creation">{{cource.creation | date: 'yyyy-MM-dd'}}</span>
       </div>
       <div>{{cource.description}}</div>
-      <button (click)="openRemoveModal(cource.id)">remove</button>
-      <button [routerLink]="['/cources/', cource.id]">Edit cource</button>
+      <button (click)="openRemoveModal(cource._id)">remove</button>
+      <button [routerLink]="['/cources/', cource._id]">Edit cource</button>
     </div>
     <app-cource-pagination [size]="4"></app-cource-pagination>
   </div>

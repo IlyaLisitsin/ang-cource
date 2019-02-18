@@ -1,5 +1,5 @@
 export class Cource {
-  id: string;
+  id?: string;
   title: string;
   creation: Date | string;
   duration: string;
