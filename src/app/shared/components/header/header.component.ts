@@ -12,7 +12,7 @@ import * as AuthActions from '../../store/actions/auth'
 })
 
 export class HeaderComponent implements OnInit {
-  @Input() isAuth: string
+  @Input() isAuth: string;
 
   constructor(
     private store: Store<State>,

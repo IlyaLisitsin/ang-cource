@@ -34,4 +34,9 @@ export class AddCourceComponent implements OnInit {
 
     this.store.dispatch(new CourceActions.AddCource(cource));
   }
+
+  validate() {
+    return !(this.title && this.duration);
+  }
+
 }

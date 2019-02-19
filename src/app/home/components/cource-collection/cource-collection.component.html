@@ -2,7 +2,7 @@
   <div *ngIf="courcesCollection.length">
     <div
       class="cource"
-      *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'topRated'"
+      *ngFor="let cource of courcesCollection | orderBy: filterConditionFromInput || 'title'"
       appCourceBorder [creationDate]="cource.creation"
     >
       <h2>{{cource.title | uppercase}}</h2>

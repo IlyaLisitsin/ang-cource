@@ -73,9 +73,9 @@ class FileService {
   }
 
   editCource(updatedCource, responseCb) {
-    const { id } = updatedCource;
+    const { _id } = updatedCource;
 
-    Cource.findByIdAndUpdate(id, updatedCource, () => Cource.find({}, (err, collection) => {
+    Cource.findByIdAndUpdate(_id, updatedCource, () => Cource.find({}, (err, collection) => {
       if (err) responseCb(null, err);
       responseCb(collection)
     }));

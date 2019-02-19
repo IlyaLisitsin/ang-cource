@@ -6,9 +6,20 @@ import { Cource } from "../../models";
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(courcesCollection: Cource[], sortCondition: string): Cource[] {
-    // @ts-ignore
-    return courcesCollection.sort((current, next) => current[sortCondition] < next[sortCondition])
+  transform(courcesList: Cource[], conditon: string): any {
+    switch(conditon) {
+      case 'duration':
+        return courcesList.sort((a, b) => Number(b['duration']) - Number(a['duration']));
+      case 'creation':
+        // @ts-ignore
+        return courcesList.sort((a, b) => new Date(b['creation']).getTime() - new Date(a['creation']).getTime());
+      case 'title':
+        return courcesList.sort((a, b) => {
+          if(a['title'] < b['title']) return -1;
+          if(a['title'] > b['title']) return 1;
+          return 0;
+        });
+      default: return courcesList.sort((a, b) => b[conditon] - a[conditon]);
+    }
   }
-
 }

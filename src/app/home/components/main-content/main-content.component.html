@@ -1,17 +1,22 @@
 <div>
     <div class="user-panel">
-      <button (click)="startDownload()">Download cources list</button>
+      <!--<button (click)="startDownload()">Download cources list</button>-->
       <div class="search-box">
         <app-search-box></app-search-box>
       </div>
       <button routerLink="/cources/add">Add cource</button>
     </div>
-    <!--<div *ngIf="courcesCollection && courcesCollection.length">-->
-      <!--<app-cource-collection-->
-        <!--[courcesCollection]="courcesCollection"-->
-        <!--[filterConditionFromInput]="filterConditionFromInput"-->
-      <!--&gt;</app-cource-collection>-->
-    <!--</div>-->
+  <div class="filter-select-container">
+    <label for="filter-select">Choose filter:</label>
+
+    <select #filterSelect id="filter-select" (change)="onFilterSelectChange(filterSelect.value)">
+      <option value="">--Please choose an option--</option>
+      <option value="duration">duration</option>
+      <option value="creation">creation</option>
+      <option value="topRated">topRated</option>
+      <option value="title">title</option>
+    </select>
+  </div>
   <app-cource-collection
     [filterConditionFromInput]="filterConditionFromInput"
   ></app-cource-collection>

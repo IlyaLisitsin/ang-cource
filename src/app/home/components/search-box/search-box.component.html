@@ -8,7 +8,7 @@
   <div class="result-container">
     <ul *ngIf="resultCourcesList.length">
     <li *ngFor="let courceResult of resultCourcesList">
-      <a [routerLink]="['/cources/', courceResult.id]">{{ courceResult.title }}</a>
+      <a [routerLink]="['/cources/', courceResult._id]">{{ courceResult.title }}</a>
     </li>
   </ul>
     <div  class="search-box-spinner" *ngIf="loading">Loading...</div>

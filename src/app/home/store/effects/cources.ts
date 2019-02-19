@@ -10,6 +10,7 @@ import * as CourcesActions from '../actions/cources';
 import * as UIActions from "../../../shared/store/actions/ui";
 import * as RouterActions from '../../../shared/store/actions/router';
 import { getPaginationData } from "../reducers/cources";
+import { Cource } from "../../models";
 
 @Injectable()
 export class CourcesEffects {
@@ -28,7 +29,7 @@ export class CourcesEffects {
       const page = action.payload ? action.payload : 1;
 
       return this.httpClient.get(`http://localhost:8080/api/cources?page=${page}&size=4`).pipe(
-        map(response => new CourcesActions.NotifyFetchCourcesSuccess(response)),
+        map((response: Array<Cource>) => new CourcesActions.NotifyFetchCourcesSuccess(response)),
         catchError(error => of(new CourcesActions.NotifyFetchCourcesError(error))),
         finalize(() => this.store.dispatch(new UIActions.HideSpinner()))
       );

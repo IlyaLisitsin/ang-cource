@@ -39,12 +39,15 @@ export class EditCourceComponent implements OnInit {
     this.cource$.subscribe(
       cource => this.cource = cource
     )
+  }
 
+  validate() {
+    return !(this.cource.title && this.cource.duration);
   }
 
   saveChanges() {
     this.store.dispatch(new CourceActions.EditCource({
-      id: this.cource._id,
+      _id: this.cource._id,
       title: this.cource.title,
       creation: new Date(String(this.cource.creation)),
       topRated: this.cource.topRated,

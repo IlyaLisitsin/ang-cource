@@ -1,5 +1,5 @@
 <div *ngIf="cource">
-  <p>id: <span #id>{{ cource.id }}</span></p>
+  <p>id: <span>{{ cource._id }}</span></p>
   <p> Title:
     <input [(ngModel)]="cource.title">
   </p>
@@ -19,6 +19,6 @@
       <input type="checkbox" [checked]="cource.topRated" (change)="cource.topRated = !cource.topRated">
   </p>
 
-  <button (click)="saveChanges()">save changes</button>
+  <button (click)="saveChanges()" [disabled]="validate()">save changes</button>
   <button routerLink="../">cancel</button>
 </div>

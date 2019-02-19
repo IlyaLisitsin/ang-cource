@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from "@angular/common/http";
-import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, tap } from "rxjs/operators";
 import { Subject } from "rxjs";
-import {Cource} from "../../models";
+import { Cource } from "../../models";
 
 
 @Component({
