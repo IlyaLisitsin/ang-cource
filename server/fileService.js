@@ -20,10 +20,10 @@ class FileService {
     this.path = path
   }
 
-  generatePageInfo(actualCourceList, page, size) {
+  generatePageInfo(amountOfCources, page, size) {
     return {
-      totalCources: actualCourceList,
-      totalPages: Math.round(actualCourceList / size),
+      totalCources: amountOfCources,
+      totalPages: Math.ceil(amountOfCources / size),
       currentPage: Number(page),
     }
   }
