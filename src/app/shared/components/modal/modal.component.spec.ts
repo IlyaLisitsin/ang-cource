@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalComponent } from './modal.component';
+import { NgxSmartModalComponent, NgxSmartModalService } from "ngx-smart-modal";
+import { Store } from "@ngrx/store";
+import { MockStore } from "../../mocks/store";
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 describe('ModalComponent', () => {
   let component: ModalComponent;
@@ -8,7 +12,15 @@ describe('ModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent ]
+      providers: [
+        NgxSmartModalService,
+        { provide: Store, useClass: MockStore },
+      ],
+      declarations: [
+        ModalComponent,
+        NgxSmartModalComponent,
+        SpinnerComponent,
+      ]
     })
     .compileComponents();
   }));

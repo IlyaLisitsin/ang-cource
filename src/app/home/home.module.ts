@@ -13,7 +13,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { HomeRoutingModule } from "./home-routing.module";
 import { CourcePaginationComponent } from './components/cource-pagination/cource-pagination.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
-
+import { LoginPageComponent } from "./pages/login-page/login-page.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
 @NgModule({
   imports: [
@@ -32,7 +33,9 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     OrderByPipe,
     CourceBorderDirective,
     CourcePaginationComponent,
+    LoginPageComponent,
     SearchBoxComponent,
+    PageNotFoundComponent,
   ]
 })
 export class HomeModule { }

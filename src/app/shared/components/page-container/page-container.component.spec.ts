@@ -1,6 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageContainerComponent } from './page-container.component';
+import { SpinnerComponent } from "../spinner/spinner.component";
+import {HeaderComponent} from "../header/header.component";
+import {FooterComponent} from "../footer/footer.component";
+import {ModalComponent} from "../modal/modal.component";
+import {RouterModule} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
+import {BreadcrumbsComponent} from "../breadcrumbs/breadcrumbs.component";
+import {NgxSmartModalModule, NgxSmartModalService} from "ngx-smart-modal";
+import {Store} from "@ngrx/store";
+import {MockStore} from "../../mocks/store";
 
 describe('PageContainerComponent', () => {
   let component: PageContainerComponent;
@@ -8,7 +18,23 @@ describe('PageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageContainerComponent ]
+      imports: [
+        RouterModule,
+        RouterTestingModule,
+        NgxSmartModalModule
+      ],
+      providers: [
+        NgxSmartModalService,
+        { provide: Store, useClass: MockStore },
+      ],
+      declarations: [
+        PageContainerComponent,
+        SpinnerComponent,
+        HeaderComponent,
+        FooterComponent,
+        ModalComponent,
+        BreadcrumbsComponent,
+      ]
     })
     .compileComponents();
   }));
