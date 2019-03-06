@@ -11,11 +11,10 @@ const courceSchema = new Schema({
 
 const Cource = mongoose.model('Cource', courceSchema);
 
-mongoose.connect('mongodb+srv://Ilya:Ilya@cluster0-9mimi.mongodb.net/cources-project',  { useNewUrlParser: true, autoIndex: false });
 const { connection } = mongoose;
 connection.on('error', console.error.bind(console, 'connection error:'));
 
-class FileService {
+class CourcesService {
   constructor(path) {
     this.path = path
   }
@@ -96,4 +95,4 @@ class FileService {
   }
 }
 
-module.exports = FileService;
+module.exports = CourcesService;

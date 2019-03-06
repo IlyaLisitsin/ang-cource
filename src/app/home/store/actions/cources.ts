@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import {Cource} from "../../models";
+import { Cource } from "../../models";
 
 export const FETCH_COURCES = '[Cources] Fetch cources';
 export const FETCH_COURCES_SUCCESS = '[Cources] Fetch cources success';

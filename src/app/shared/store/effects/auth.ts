@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from "@ngrx/store";
-import {map, mergeMap, tap, finalize, catchError} from "rxjs/operators";
+import { map, mergeMap, tap, finalize, catchError, take } from "rxjs/operators";
+import { of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-
 
 import { State } from "../reducers";
 
 import * as AuthActions from '../actions/auth';
 import * as RouterActions from '../actions/router';
 import * as UiActions from '../actions/ui'
-import {of} from "rxjs";
 
 @Injectable()
 export class AuthEffects {
@@ -29,18 +28,21 @@ export class AuthEffects {
       const loginFormData = action.payload;
 
       return this.httpClient.post('http://localhost:8080/api/login', loginFormData).pipe(
+        take(1),
         map(response => {
-          console.log('login response', response)
+          if (response['error']) return new AuthActions.SignInError(response['error']);
+
+          this.store.dispatch(new AuthActions.SignInSuccess(response));
+
           return new RouterActions.Go({
             path: ['/cources']
           })
-
         }),
         catchError(error => of(new AuthActions.SignInError(error))),
         finalize(() => this.store.dispatch(new UiActions.HideSpinner()))
       )
     }),
-  )
+  );
 
   @Effect()
   signOut$ = this.actions$.pipe(
@@ -48,7 +50,7 @@ export class AuthEffects {
     map(() => new RouterActions.Go({
       path: ['/login']
     }))
-  )
+  );
 
  @Effect({ dispatch: false })
   notifySignInError$ = this.actions$.pipe(
@@ -56,7 +58,7 @@ export class AuthEffects {
     map((action: AuthActions.SignInError) => {
       const { statusText, message } = action.payload;
 
-      this.store.dispatch(new UiActions.ShowModal({ heading: statusText, content: message }));
+      return this.store.dispatch(new UiActions.ShowModal({ heading: statusText, content: message }));
     })
   );
 
